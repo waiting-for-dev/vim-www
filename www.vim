@@ -8,11 +8,16 @@ let g:www_urls = {
          \ 'rails' : 'http://guides.rubyonrails.org/index.html',
          \ }
 
-function! s:Open(url)
-   call system('xdg-open ' . shellescape(g:www_urls[a:url], 1).' &')
+function! s:Open(...)
+   let urls = []
+   for key in a:000
+      :call add(urls, g:www_urls[key])
+   endfor
+   silent :execute "!iceweasel ".join(urls)." &"
+   redraw!
 endfunction
 
 
 "if !exists(":Www")
-   command! -nargs=1 Www :call s:Open(<q-args>)
+   command! -nargs=+ Www :call s:Open(<f-args>)
 "endif
