@@ -11,21 +11,24 @@ let g:www_urls = {
 
 function! s:open_favourites(...)
    let urls = []
-   for key in a:000
-      if key =~ "\?"
-         let position = match(key, "\?")
-         let tag = strpart(key, 0, position)
-         let query = strpart(key, position + 1)
-         let url = substitute(g:www_urls[tag], "{{QUERY}}", query, "g")
-      else
-         let tag = key
-         let url = g:www_urls[tag]
-      endif
-      :call add(urls, url)
+   for tag_arg in a:000
+      :call add(urls, s:get_url_from_tag_arg(tag_arg))
    endfor
    for url in urls
       :call s:handle_url(url)
    endfor
+endfunction
+
+function! s:get_url_from_tag_arg(tag_arg)
+   if a:tag_arg =~ "\?"
+      let position = match(a:tag_arg, "\?")
+      let tag = strpart(a:tag_arg, 0, position)
+      let query = strpart(a:tag_arg, position + 1)
+      return substitute(g:www_urls[tag], "{{QUERY}}", query, "g")
+   else
+      let tag = a:tag_arg
+      return g:www_urls[tag]
+   endif
 endfunction
 
 function! s:handle_url(url) "{{{
