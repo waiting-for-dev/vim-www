@@ -12,32 +12,40 @@ let g:www_urls = {
 function! s:open_favourites(...)
    let urls = []
    for tag_arg in a:000
-      :call add(urls, s:get_url_from_tag_arg(tag_arg))
+      :call add(urls, s:UrlHelper.get_url_from_tag_arg(tag_arg))
    endfor
    for url in urls
       :call s:UrlHandler.handle(url)
    endfor
 endfunction
 
-function! s:get_url_from_tag_arg(tag_arg)
+let s:UrlHelper = {}
+function! s:UrlHelper.get_url_from_tag_arg(tag_arg)
    if a:tag_arg =~ "\?"
-      let position = match(a:tag_arg, "\?")
-      let tag = strpart(a:tag_arg, 0, position)
-      let query = strpart(a:tag_arg, position + 1)
-      return substitute(g:www_urls[tag], "{{QUERY}}", query, "g")
+      return self.get_url_from_tag_with_query(a:tag_arg)
    else
-      let tag = a:tag_arg
-      return g:www_urls[tag]
+      return self.get_url_from_tag(a:tag_arg)
    endif
+endfunction
+
+function! s:UrlHelper.get_url_from_tag(tag_arg)
+   return g:www_urls[a:tag_arg]
+endfunction
+
+function! s:UrlHelper.get_url_from_tag_with_query(tag_arg)
+   let position = match(a:tag_arg, "\?")
+   let tag = strpart(a:tag_arg, 0, position)
+   let query = strpart(a:tag_arg, position + 1)
+   return substitute(g:www_urls[tag], "{{QUERY}}", query, "g")
 endfunction
 
 let s:UrlHandler = {}
 function! s:UrlHandler.handle(url) "{{{
   try 
-    if s:SystemTools.is_windows()
+    if s:SystemHelper.is_windows()
       call self.handle_in_win(a:url)
       return
-    elseif s:SystemTools.is_macunix()
+    elseif s:SystemHelper.is_macunix()
       call self.handle_in_macosx(a:url)
       return
     else
@@ -60,12 +68,12 @@ function! s:UrlHandler.handle_in_linux(url)
    call system('xdg-open ' . shellescape(a:url, 1).' &')
 endfunction
 
-let s:SystemTools = {}
-function! s:SystemTools.is_windows() "{{{
+let s:SystemHelper = {}
+function! s:SystemHelper.is_windows() "{{{
   return has("win32") || has("win64") || has("win95") || has("win16")
 endfunction "}}}
 
-function! s:SystemTools.is_macunix()
+function! s:SystemHelper.is_macunix()
    return has("macunix")
 endfunction
 
