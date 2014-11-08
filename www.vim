@@ -15,7 +15,7 @@ function! s:open_favourites(...)
       :call add(urls, s:get_url_from_tag_arg(tag_arg))
    endfor
    for url in urls
-      :call s:handle_url(url)
+      :call s:UrlHandler.handle(url)
    endfor
 endfunction
 
@@ -31,39 +31,41 @@ function! s:get_url_from_tag_arg(tag_arg)
    endif
 endfunction
 
-function! s:handle_url(url) "{{{
+let s:UrlHandler = {}
+function! s:UrlHandler.handle(url) "{{{
   try 
-    if s:is_windows()
-      call s:handle_url_in_win(a:url)
+    if s:SystemTools.is_windows()
+      call self.handle_in_win(a:url)
       return
-    elseif s:is_macunix()
-      call s:handle_url_in_macunix(a:url)
+    elseif s:SystemTools.is_macunix()
+      call self.handle_in_macosx(a:url)
       return
     else
-      call s:handle_url_in_linux(a:url)
+      call self.handle_in_linux(a:url)
       return
     endif
   endtry
   echomsg 'Default www.vim link handler was unable to open the HTML file!'
 endfunction "}}}
 
-function! s:handle_url_in_win(url)
+function! s:UrlHandler.handle_in_win(url)
    execute 'silent ! start "Title" /B ' . shellescape(a:url, 1)
 endfunction
 
-function! s:handle_url_in_macunix(url)
+function! s:UrlHandler.handle_in_macunix(url)
    execute '!open ' . shellescape(a:url, 1)
 endfunction
 
-function! s:handle_url_in_linux(url)
+function! s:UrlHandler.handle_in_linux(url)
    call system('xdg-open ' . shellescape(a:url, 1).' &')
 endfunction
 
-function! s:is_windows() "{{{
+let s:SystemTools = {}
+function! s:SystemTools.is_windows() "{{{
   return has("win32") || has("win64") || has("win95") || has("win16")
 endfunction "}}}
 
-function! s:is_macunix()
+function! s:SystemTools.is_macunix()
    return has("macunix")
 endfunction
 
