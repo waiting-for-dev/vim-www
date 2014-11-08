@@ -9,7 +9,7 @@ let g:www_urls = {
          \ 'github' : 'http://github.com',
          \ }
 
-function! s:OpenFavourites(...)
+function! s:open_favourites(...)
    let urls = []
    for key in a:000
       if key =~ "\?"
@@ -24,43 +24,46 @@ function! s:OpenFavourites(...)
       :call add(urls, url)
    endfor
    for url in urls
-      :call s:OpenUrl(url)
+      :call s:handle_url(url)
    endfor
 endfunction
 
-" vimwiki#base#system_open_link
-function! s:OpenUrl(url) "{{{
-  " handlers
-  function! s:win32_handler(url)
-    "http://vim.wikia.com/wiki/Opening_current_Vim_file_in_your_Windows_browser
-    execute 'silent ! start "Title" /B ' . shellescape(a:url, 1)
-  endfunction
-  function! s:macunix_handler(url)
-    execute '!open ' . shellescape(a:url, 1)
-  endfunction
-  function! s:linux_handler(url)
-    call system('xdg-open ' . shellescape(a:url, 1).' &')
-  endfunction
-  let success = 0
+function! s:handle_url(url) "{{{
   try 
-    if vimwiki#u#is_windows()
-      call s:win32_handler(a:url)
+    if s:is_windows()
+      call s:handle_url_in_win(a:url)
       return
-    elseif has("macunix")
-      call s:macunix_handler(a:url)
+    elseif s:is_macunix()
+      call s:handle_url_in_macunix(a:url)
       return
     else
-      call s:linux_handler(a:url)
+      call s:handle_url_in_linux(a:url)
       return
     endif
   endtry
-  echomsg 'Default Vimwiki link handler was unable to open the HTML file!'
+  echomsg 'Default www.vim link handler was unable to open the HTML file!'
 endfunction "}}}
 
-function! vimwiki#u#is_windows() "{{{
+function! s:handle_url_in_win(url)
+   execute 'silent ! start "Title" /B ' . shellescape(a:url, 1)
+endfunction
+
+function! s:handle_url_in_macunix(url)
+   execute '!open ' . shellescape(a:url, 1)
+endfunction
+
+function! s:handle_url_in_linux(url)
+   call system('xdg-open ' . shellescape(a:url, 1).' &')
+endfunction
+
+function! s:is_windows() "{{{
   return has("win32") || has("win64") || has("win95") || has("win16")
 endfunction "}}}
 
+function! s:is_macunix()
+   return has("macunix")
+endfunction
+
 "if !exists(":Www")
-command! -nargs=+ Www :call s:OpenFavourites(<f-args>)
+command! -nargs=+ Www :call s:open_favourites(<f-args>)
 "endif
