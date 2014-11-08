@@ -29,14 +29,27 @@ function! s:UrlHelper.get_url_from_tag_arg(tag_arg)
 endfunction
 
 function! s:UrlHelper.get_url_from_tag(tag_arg)
-   return g:www_urls[a:tag_arg]
+   let tag = a:tag_arg
+   if has_key(g:www_urls, tag)
+      return g:www_urls[tag]
+   else
+      :call s:UrlHelper.inform_tag_no_present(tag)
+   endif
 endfunction
 
 function! s:UrlHelper.get_url_from_tag_with_query(tag_arg)
    let position = match(a:tag_arg, "\?")
    let tag = strpart(a:tag_arg, 0, position)
-   let query = strpart(a:tag_arg, position + 1)
-   return substitute(g:www_urls[tag], "{{QUERY}}", query, "g")
+   if has_key(g:www_urls, tag)
+      let query = strpart(a:tag_arg, position + 1)
+      return substitute(g:www_urls[tag], "{{QUERY}}", query, "g")
+   else
+      :call s:UrlHelper.inform_tag_no_present(tag)
+   end
+endfunction
+
+function! s:UrlHelper.inform_tag_no_present(tag)
+   echomsg "[www.vim]: Tag ".a:tag." is not defined in g:www_urls"
 endfunction
 
 let s:UrlHandler = {}
