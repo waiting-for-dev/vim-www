@@ -4,7 +4,7 @@
 " Repository: http://github.com/waiting-for-dev/www.vim
 
 let g:www_urls = {
-         \ 'g' : 'http://google.com/#q={{QUERY}}',
+         \ 'g' : 'https://www.google.com/search?q={{QUERY}}',
          \ 'rails' : 'http://guides.rubyonrails.org/index.html',
          \ 'github' : 'http://github.com',
          \ }
