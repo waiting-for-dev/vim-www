@@ -10,13 +10,14 @@ let g:www_urls = {
          \ }
 
 function! s:open_favourites(...)
-   let urls = []
    for tag_arg in a:000
-      :call add(urls, s:UrlHelper.get_url_from_tag_arg(tag_arg))
+      :call s:open_favourite(tag_arg)
    endfor
-   for url in urls
-      :call s:UrlHandler.handle(url)
-   endfor
+endfunction
+
+function! s:open_favourite(tag_arg)
+   let url = s:UrlHelper.get_url_from_tag_arg(a:tag_arg)
+   :call s:UrlHandler.handle(url)
 endfunction
 
 let s:UrlHelper = {}
@@ -92,4 +93,5 @@ endfunction
 
 "if !exists(":Www")
 command! -nargs=+ Www :call s:open_favourites(<f-args>)
+command! -nargs=1 Www1 :call s:open_favourite(<f-args>)
 "endif
