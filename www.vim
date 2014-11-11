@@ -6,9 +6,14 @@
 let g:www_urls = {
          \ 'g?' : 'https://www.google.com/search?q={{QUERY}}',
          \ 'rails' : 'http://guides.rubyonrails.org/index.html',
+         \ 'ruby': 'https://www.ruby-lang.org',
          \ 'github' : 'http://github.com',
          \ }
 let g:www_default_search_engine = 'g?'
+let g:www_sessions = {
+         \ 'ruby' : ['rails', 'ruby'],
+         \ 'github' : ['github'],
+         \ }
 
 function! s:open_favourites(...)
    for tag_arg in a:000
@@ -19,6 +24,20 @@ endfunction
 function! s:open_favourite(tag_arg)
    let url = s:UrlHelper.get_url_from_tag_arg(a:tag_arg)
    :call s:UrlHandler.handle(url)
+endfunction
+
+function! s:open_sessions(...)
+   for session_name in a:000
+      :call s:open_session(session_name)
+   endfor
+endfunction
+
+function! s:open_session(session_name)
+   if !has_key(g:www_sessions, a:session_name)
+      echomsg "[www.vim]: Session ".a:session_name." is not defined in g:www_sessions"
+   else
+      :call call('s:open_favourites', g:www_sessions[a:session_name])
+   endif
 endfunction
 
 function! s:default_search(query)
@@ -103,4 +122,5 @@ endfunction
 command! -nargs=+ Wopen :call s:open_favourites(<f-args>)
 command! -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
 command! -nargs=1 Wsearch :call s:default_search(<f-args>)
+command! -nargs=+ Wsession :call s:open_sessions(<f-args>)
 "endif
