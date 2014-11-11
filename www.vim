@@ -8,6 +8,7 @@ let g:www_urls = {
          \ 'rails' : 'http://guides.rubyonrails.org/index.html',
          \ 'github' : 'http://github.com',
          \ }
+let g:www_default_search_engine = 'g'
 
 function! s:open_favourites(...)
    for tag_arg in a:000
@@ -18,6 +19,14 @@ endfunction
 function! s:open_favourite(tag_arg)
    let url = s:UrlHelper.get_url_from_tag_arg(a:tag_arg)
    :call s:UrlHandler.handle(url)
+endfunction
+
+function! s:default_search(query)
+   if !exists('g:www_default_search_engine')
+      echomsg "[www.vim] There is not default search engine configured in g:www_default_search_engine"
+   else
+      :call s:open_favourite(g:www_default_search_engine.'?'.a:query)
+   end
 endfunction
 
 let s:UrlHelper = {}
@@ -92,6 +101,7 @@ function! s:SystemHelper.is_macunix()
 endfunction
 
 "if !exists(":Www")
-command! -nargs=+ Www :call s:open_favourites(<f-args>)
-command! -nargs=1 Www1 :call s:open_favourite(<f-args>)
+command! -nargs=+ Wopen :call s:open_favourites(<f-args>)
+command! -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
+command! -nargs=1 Wsearch :call s:default_search(<f-args>)
 "endif
