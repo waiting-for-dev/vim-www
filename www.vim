@@ -14,6 +14,7 @@ let g:www_sessions = {
          \ 'ruby' : ['rails', 'ruby'],
          \ 'github' : ['github'],
          \ }
+"let g:www_launch_browser_command = 'google-chrome'
 
 function! s:open_favourites(...)
    for tag_arg in a:000
@@ -45,7 +46,7 @@ function! s:default_search(query)
       echomsg "[www.vim] There is not default search engine configured in g:www_default_search_engine"
    else
       :call s:open_favourite(g:www_default_search_engine.a:query)
-   end
+   endif
 endfunction
 
 let s:UrlHelper = {}
@@ -83,7 +84,10 @@ endfunction
 let s:UrlHandler = {}
 function! s:UrlHandler.handle(url) "{{{
   try 
-    if s:SystemHelper.is_windows()
+    if exists('g:www_launch_browser_command')
+      call self.handle_custom(a:url)
+      return
+    elseif s:SystemHelper.is_windows()
       call self.handle_in_win(a:url)
       return
     elseif s:SystemHelper.is_macunix()
@@ -94,11 +98,20 @@ function! s:UrlHandler.handle(url) "{{{
       return
     endif
   endtry
-  echomsg 'Default www.vim link handler was unable to open the HTML file!'
+  echomsg '[www.vim] An error has occurred trying to launch de browser'
 endfunction "}}}
 
+function! s:UrlHandler.handle_custom(url)
+   if !exists('g:www_launch_browser_command')
+      echomsg '[www.vim] To use a custom url handler you must define g:www_launch_browser_command'
+   else
+      execute 'silent ! '.g:www_launch_browser_command.' '.shellescape(a:url, 1)
+      redraw!
+   endif
+endfunction
+
 function! s:UrlHandler.handle_in_win(url)
-   execute 'silent ! start "Title" /B ' . shellescape(a:url, 1)
+   execute 'silent ! start "Title" /B '.shellescape(a:url, 1)
 endfunction
 
 function! s:UrlHandler.handle_in_macunix(url)
