@@ -39,11 +39,10 @@ function! s:UrlHelper.get_url_from_tag_arg(tag_arg)
 endfunction
 
 function! s:UrlHelper.get_url_from_tag(tag_arg)
-   let tag = a:tag_arg
-   if has_key(g:www_urls, tag)
-      return g:www_urls[tag]
+   if has_key(g:www_urls, a:tag_arg)
+      return g:www_urls[a:tag_arg]
    else
-      :call s:UrlHelper.inform_tag_no_present(tag)
+      return a:tag_arg
    endif
 endfunction
 
