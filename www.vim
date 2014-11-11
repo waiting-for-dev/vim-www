@@ -4,11 +4,11 @@
 " Repository: http://github.com/waiting-for-dev/www.vim
 
 let g:www_urls = {
-         \ 'g' : 'https://www.google.com/search?q={{QUERY}}',
+         \ 'g?' : 'https://www.google.com/search?q={{QUERY}}',
          \ 'rails' : 'http://guides.rubyonrails.org/index.html',
          \ 'github' : 'http://github.com',
          \ }
-let g:www_default_search_engine = 'g'
+let g:www_default_search_engine = 'g?'
 
 function! s:open_favourites(...)
    for tag_arg in a:000
@@ -25,7 +25,7 @@ function! s:default_search(query)
    if !exists('g:www_default_search_engine')
       echomsg "[www.vim] There is not default search engine configured in g:www_default_search_engine"
    else
-      :call s:open_favourite(g:www_default_search_engine.'?'.a:query)
+      :call s:open_favourite(g:www_default_search_engine.a:query)
    end
 endfunction
 
@@ -49,7 +49,7 @@ endfunction
 
 function! s:UrlHelper.get_url_from_tag_with_query(tag_arg)
    let position = match(a:tag_arg, "\?")
-   let tag = strpart(a:tag_arg, 0, position)
+   let tag = strpart(a:tag_arg, 0, position + 1)
    if has_key(g:www_urls, tag)
       let query = strpart(a:tag_arg, position + 1)
       return substitute(g:www_urls[tag], "{{QUERY}}", query, "g")
