@@ -12,13 +12,6 @@ let g:loaded_www = "0.0.1"
 let s:save_cpo = &cpo
 set cpo&vim
 
-let g:www_default_tags = {
-         \ 'rails' : 'http://guides.rubyonrails.org/index.html',
-         \ 'ruby': 'https://www.ruby-lang.org',
-         \ 'github' : 'http://github.com',
-         \ 'g?' : 'https://www.google.com/search?q={{QUERY}}',
-         \ }
-
 let g:www_default_search_engine = 'g?'
 let g:www_sessions = {
          \ 'ruby' : ['rails', 'ruby'],

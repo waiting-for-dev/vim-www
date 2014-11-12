@@ -33,7 +33,7 @@ endfunction
 
 function! www#url_helper#get_tag_dictionary()
    if exists('g:www_urls')
-      return extend(g:www_default_tags, g:www_urls)
+      return extend(g:www#defaults#tags, g:www_urls)
    else
       return g:www_default_tags
    endif
