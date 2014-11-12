@@ -38,3 +38,11 @@ function! www#url_helper#get_tag_dictionary()
       return g:www_default_tags
    endif
 endfunction
+
+function! www#url_helper#get_session_dictionary()
+   if exists('g:www_sessions')
+      return extend(g:www#defaults#sessions, g:www_sessions)
+   else
+      return g:www#defaults#sessions
+   endif
+endfunction

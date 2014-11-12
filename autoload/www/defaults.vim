@@ -5,3 +5,4 @@ let g:www#defaults#tags = {
          \ 'g?' : 'https://www.google.com/search?q={{QUERY}}',
          \ }
 
+let g:www#defaults#sessions = {'ruby' : ['ruby', 'rails']}

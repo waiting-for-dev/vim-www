@@ -6,6 +6,8 @@ function! www#complete_helper#tags(arg_lead, cmd_line, cursor_pos)
 endfunction
 
 function! www#complete_helper#sessions(arg_lead, cmd_line, cursor_pos)
-   let options = sort(keys(g:www_sessions))
+   let session_dict = www#url_helper#get_session_dictionary()
+   let sessions = keys(session_dict)
+   let options = sort(sessions)
    return join(sort(options), "\n")
 endfunction
