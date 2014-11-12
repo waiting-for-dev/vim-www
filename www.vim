@@ -132,7 +132,12 @@ function! s:SystemHelper.is_macunix()
 endfunction
 
 function! s:complete_tags(arg_lead, cmd_line, cursor_pos)
-   let options = extend(keys(g:www_urls), ['http:', 'http://www.', 'https://', 'https://www.'])
+   let options = sort(extend(keys(g:www_urls), ['http://', 'http://www.', 'https://', 'https://www.']))
+   return join(options, "\n")
+endfunction
+
+function! s:complete_sessions(arg_lead, cmd_line, cursor_pos)
+   let options = sort(keys(g:www_sessions))
    return join(sort(options), "\n")
 endfunction
 
@@ -140,5 +145,5 @@ endfunction
 command! -complete=custom,s:complete_tags -nargs=+ Wopen :call s:open_favourites(<f-args>)
 command! -complete=custom,s:complete_tags -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
 command! -nargs=1 Wsearch :call s:default_search(<f-args>)
-command! -nargs=+ Wsession :call s:open_sessions(<f-args>)
+command! -complete=custom,s:complete_sessions -nargs=+ Wsession :call s:open_sessions(<f-args>)
 "endif
