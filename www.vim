@@ -131,13 +131,14 @@ function! s:SystemHelper.is_macunix()
    return has("macunix")
 endfunction
 
-function! ListTags(A, L, P)
-   return join(keys(g:www_urls), "\n")
+function! s:complete_tags(arg_lead, cmd_line, cursor_pos)
+   let options = extend(keys(g:www_urls), ['http:', 'http://www.', 'https://', 'https://www.'])
+   return join(sort(options), "\n")
 endfunction
 
 "if !exists(":Www")
-command! -complete=custom,ListTags -nargs=+ Wopen :call s:open_favourites(<f-args>)
-command! -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
+command! -complete=custom,s:complete_tags -nargs=+ Wopen :call s:open_favourites(<f-args>)
+command! -complete=custom,s:complete_tags -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
 command! -nargs=1 Wsearch :call s:default_search(<f-args>)
 command! -nargs=+ Wsession :call s:open_sessions(<f-args>)
 "endif
