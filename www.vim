@@ -14,7 +14,7 @@ let g:www_sessions = {
          \ 'ruby' : ['rails', 'ruby'],
          \ 'github' : ['github'],
          \ }
-"let g:www_launch_browser_command = 'google-chrome'
+"let g:www_launch_browser_command = 'google-chrome {{URL}} &'
 
 function! s:open_favourites(...)
    for tag_arg in a:000
@@ -105,7 +105,7 @@ function! s:UrlHandler.handle_custom(url)
    if !exists('g:www_launch_browser_command')
       echomsg '[www.vim] To use a custom url handler you must define g:www_launch_browser_command'
    else
-      execute 'silent ! '.g:www_launch_browser_command.' '.shellescape(a:url, 1)
+      execute 'silent ! '.substitute(g:www_launch_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
       redraw!
    endif
 endfunction
@@ -131,8 +131,12 @@ function! s:SystemHelper.is_macunix()
    return has("macunix")
 endfunction
 
+function! ListTags(A, L, P)
+   return join(keys(g:www_urls), "\n")
+endfunction
+
 "if !exists(":Www")
-command! -nargs=+ Wopen :call s:open_favourites(<f-args>)
+command! -complete=custom,ListTags -nargs=+ Wopen :call s:open_favourites(<f-args>)
 command! -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
 command! -nargs=1 Wsearch :call s:default_search(<f-args>)
 command! -nargs=+ Wsession :call s:open_sessions(<f-args>)
