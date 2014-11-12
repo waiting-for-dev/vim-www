@@ -3,6 +3,12 @@
 " Maintainer:	Marc Busqué <marc@lamarciana.com>
 " Repository: http://github.com/waiting-for-dev/www.vim
 
+if exists("g:loaded_www") || &cp
+   finish
+endif
+
+let g:loaded_www = "0.0.1"
+
 let g:www_urls = {
          \ 'g?' : 'https://www.google.com/search?q={{QUERY}}',
          \ 'rails' : 'http://guides.rubyonrails.org/index.html',
