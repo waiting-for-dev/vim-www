@@ -150,12 +150,21 @@ function! s:complete_sessions(arg_lead, cmd_line, cursor_pos)
    return join(sort(options), "\n")
 endfunction
 
-"if !exists(":Www")
-command! -complete=custom,s:complete_tags -nargs=+ Wopen :call s:open_favourites(<f-args>)
-command! -complete=custom,s:complete_tags -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
-command! -nargs=1 Wsearch :call s:default_search(<f-args>)
-command! -complete=custom,s:complete_sessions -nargs=+ Wsession :call s:open_sessions(<f-args>)
-"endif
+if !exists(":Wopen")
+   command -complete=custom,s:complete_tags -nargs=+ Wopen :call s:open_favourites(<f-args>)
+endif
+
+if !exists(":Wopen1")
+   command -complete=custom,s:complete_tags -nargs=1 Wopen1 :call s:open_favourite(<f-args>)
+endif
+
+if !exists(":Wsearch")
+   command -nargs=1 Wsearch :call s:default_search(<f-args>)
+endif
+
+if !exists(":Wsession")
+   command -complete=custom,s:complete_sessions -nargs=+ Wsession :call s:open_sessions(<f-args>)
+endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
