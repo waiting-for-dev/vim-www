@@ -3,11 +3,14 @@
 " Maintainer:	Marc Busqué <marc@lamarciana.com>
 " Repository: http://github.com/waiting-for-dev/www.vim
 
-if exists("g:loaded_www") || &cp
+if exists("g:loaded_www")
    finish
 endif
 
 let g:loaded_www = "0.0.1"
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 let g:www_urls = {
          \ 'g?' : 'https://www.google.com/search?q={{QUERY}}',
@@ -153,3 +156,6 @@ command! -complete=custom,s:complete_tags -nargs=1 Wopen1 :call s:open_favourite
 command! -nargs=1 Wsearch :call s:default_search(<f-args>)
 command! -complete=custom,s:complete_sessions -nargs=+ Wsession :call s:open_sessions(<f-args>)
 "endif
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
