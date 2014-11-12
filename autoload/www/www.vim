@@ -27,6 +27,6 @@ function! www#www#default_search(query)
    if !exists('g:www_default_search_engine')
       echomsg "[www.vim] There is not default search engine configured in g:www_default_search_engine"
    else
-      :call www#www#open_favourite(g:www_default_search_engine.a:query)
+      :call www#www#open_favourite(www#url_helper#get_default_search_engine().a:query)
    endif
 endfunction

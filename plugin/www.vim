@@ -12,7 +12,6 @@ let g:loaded_www = "0.0.1"
 let s:save_cpo = &cpo
 set cpo&vim
 
-let g:www_default_search_engine = 'g?'
 "let g:www_launch_browser_command = 'google-chrome {{URL}} &'
 
 if !exists(":Wopen")

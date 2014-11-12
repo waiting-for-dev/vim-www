@@ -46,3 +46,11 @@ function! www#url_helper#get_session_dictionary()
       return g:www#defaults#sessions
    endif
 endfunction
+
+function! www#url_helper#get_default_search_engine()
+   if exists('g:www_default_search_engine')
+      return g:www_default_search_engine
+   else
+      return g:www#defaults#search_engine
+   endif
+endfunction
