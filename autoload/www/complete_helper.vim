@@ -1,5 +1,7 @@
 function! www#complete_helper#tags(arg_lead, cmd_line, cursor_pos)
-   let options = sort(extend(keys(g:www_urls), ['http://', 'http://www.', 'https://', 'https://www.']))
+   let tag_dict = www#url_helper#get_tag_dictionary()
+   let tags = keys(tag_dict)
+   let options = sort(extend(tags, ['http://', 'http://www.', 'https://', 'https://www.']))
    return join(options, "\n")
 endfunction
 
