@@ -6,4 +6,4 @@ let g:www#defaults#tags = {
          \ 'y?' : 'http://www.youtube.com/results?search_query={{QUERY}}',
          \ }
 
-let g:www#defaults#sessions = {'ruby' : ['ruby', 'rails']}
+let g:www#defaults#sessions = {'ruby' : ['http://sport.es', 'rails']}

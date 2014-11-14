@@ -16,10 +16,11 @@ function! www#www#open_sessions(...)
 endfunction
 
 function! www#www#open_session(session_name)
-   if !has_key(g:www_sessions, a:session_name)
+   let session_dict = www#url_helper#get_session_dictionary()
+   if !has_key(session_dict, a:session_name)
       echomsg "[www.vim]: Session ".a:session_name." is not defined in g:www_sessions"
    else
-      call call('www#www#open_references', g:www_sessions[a:session_name])
+      call call('www#www#open_references', session_dict[a:session_name])
    endif
 endfunction
 
