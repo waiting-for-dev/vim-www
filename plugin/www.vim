@@ -12,14 +12,12 @@ let g:loaded_www = "0.0.1"
 let s:save_cpo = &cpo
 set cpo&vim
 
-"let g:www_launch_browser_command = 'google-chrome {{URL}} &'
-
 if !exists(":Wopen")
-   command -complete=custom,www#complete_helper#tags -nargs=+ Wopen :call www#www#open_favourites(<f-args>)
+   command -complete=custom,www#complete_helper#tags -nargs=+ Wopen :call www#www#open_references(<f-args>)
 endif
 
 if !exists(":Wopen1")
-   command -complete=custom,www#complete_helper#tags -nargs=1 Wopen1 :call www#www#open_favourite(<f-args>)
+   command -complete=custom,www#complete_helper#tags -nargs=1 Wopen1 :call www#www#open_reference(<f-args>)
 endif
 
 if !exists(":Wsearch")

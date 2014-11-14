@@ -1,29 +1,24 @@
-function! www#url_helper#get_url_from_tag_arg(tag_arg)
-   if a:tag_arg =~ "\?"
-      return www#url_helper#get_url_from_tag_with_query(a:tag_arg)
+function! www#url_helper#get_url_from_ref(ref)
+   if a:ref =~ "\?"
+      return www#url_helper#get_url_for_search_engine(a:ref)
+   endif
+   let tag_dict = www#url_helper#get_tag_dictionary()
+   if has_key(tag_dict, a:ref)
+      return tag_dict[a:ref]
    else
-      return www#url_helper#get_url_from_tag(a:tag_arg)
+      return a:ref
    endif
 endfunction
 
-function! www#url_helper#get_url_from_tag(tag_arg)
+function! www#url_helper#get_url_for_search_engine(ref)
    let tag_dict = www#url_helper#get_tag_dictionary()
-   if has_key(tag_dict, a:tag_arg)
-      return tag_dict[a:tag_arg]
-   else
-      return a:tag_arg
-   endif
-endfunction
-
-function! www#url_helper#get_url_from_tag_with_query(tag_arg)
-   let tag_dict = www#url_helper#get_tag_dictionary()
-   let position = match(a:tag_arg, "\?")
-   let tag = strpart(a:tag_arg, 0, position + 1)
+   let position = match(a:ref, "\?")
+   let tag = strpart(a:ref, 0, position + 1)
    if has_key(tag_dict, tag)
-      let query = strpart(a:tag_arg, position + 1)
+      let query = strpart(a:ref, position + 1)
       return substitute(tag_dict[tag], "{{QUERY}}", query, "g")
    else
-      :call www#url_helper#inform_tag_no_present(tag)
+      call www#url_helper#inform_tag_no_present(tag)
    end
 endfunction
 
