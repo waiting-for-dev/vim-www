@@ -21,12 +21,17 @@ if !exists(":Wopen1")
 endif
 
 if !exists(":Wsearch")
-   command -nargs=1 Wsearch :call www#www#default_search(<f-args>)
+   command -nargs=1 Wsearch call www#www#default_search(<f-args>)
 endif
 
 if !exists(":Wsession")
    command -complete=custom,www#complete_helper#sessions -nargs=+ Wsession :call www#www#open_sessions(<f-args>)
 endif
+
+nnoremap <leader>ws :call www#www#default_search(expand("<cWORD>"))<CR>
+vnoremap <leader>ws :call www#www#default_search(@*)<CR>
+nnoremap <leader>wb :call www#www#open_reference(expand("<cWORD>"))<CR>
+vnoremap <leader>wb :call www#www#open_reference(@*)<CR>
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
