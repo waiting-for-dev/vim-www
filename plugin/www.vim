@@ -28,10 +28,16 @@ if !exists(":Wsession")
    command -complete=custom,www#complete_helper#sessions -nargs=+ Wsession :call www#www#open_sessions(<f-args>)
 endif
 
-nnoremap <leader>ws :call www#www#default_search(expand("<cWORD>"))<CR>
-vnoremap <leader>ws :call www#www#default_search(@*)<CR>
-nnoremap <leader>wb :call www#www#open_reference(expand("<cWORD>"))<CR>
-vnoremap <leader>wb :call www#www#open_reference(@*)<CR>
+if !exists('g:www_map_keys')
+    let g:www_map_keys = 1
+endif
+
+if g:www_map_keys
+   nnoremap <leader>wb :call www#www#open_reference(expand("<cWORD>"))<CR>
+   vnoremap <leader>wb :call www#www#open_reference(@*)<CR>
+   nnoremap <leader>ws :call www#www#default_search(expand("<cWORD>"))<CR>
+   vnoremap <leader>ws :call www#www#default_search(@*)<CR>
+endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
