@@ -13,13 +13,13 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 "Open one or more url references
-if !exists(":Wbrowse")
-   command -complete=custom,www#complete_helper#tags -nargs=+ Wbrowse :call www#www#open_references(<f-args>)
+if !exists(":Wopen")
+   command -complete=custom,www#complete_helper#tags -nargs=+ Wopen :call www#www#open_references(<f-args>)
 endif
 
 "Open one url reference
-if !exists(":Wbrowse1")
-   command -complete=custom,www#complete_helper#tags -nargs=1 Wbrowse1 :call www#www#open_reference(<f-args>)
+if !exists(":Wopen1")
+   command -complete=custom,www#complete_helper#tags -nargs=1 Wopen1 :call www#www#open_reference(<f-args>)
 endif
 
 "Search using default search engine
