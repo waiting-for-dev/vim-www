@@ -16,7 +16,12 @@ function! www#url_helper#get_url_for_search_engine(ref, tag_dict)
    let tag = strpart(a:ref, 0, position + 1)
    if has_key(a:tag_dict, tag)
       let query = strpart(a:ref, position + 1)
-      return substitute(a:tag_dict[tag], "{{QUERY}}", query, "g")
+      let value = a:tag_dict[tag]
+      if match(value, "{{QUERY}}") > -1
+         return substitute(value, "{{QUERY}}", query, "g")
+      else
+         return value.query
+      endif
    else
       call www#url_helper#inform_tag_no_present(tag)
    end
