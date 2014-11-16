@@ -1,3 +1,4 @@
+" Default tag dictionary
 let g:www#defaults#tags = {
          \ 'rails' : 'http://guides.rubyonrails.org/index.html',
          \ 'ruby': 'https://www.ruby-lang.org',
@@ -6,4 +7,5 @@ let g:www#defaults#tags = {
          \ 'y?' : 'http://www.youtube.com/results?search_query={{QUERY}}',
          \ }
 
-let g:www#defaults#sessions = {'ruby' : ['http://sport.es', 'rails']}
+" Default session dictionary
+let g:www#defaults#sessions = {}
