@@ -38,9 +38,9 @@ endif
 
 if g:www_map_keys
    "Open WORD under the cursor as url reference
-   nnoremap <leader>wb :call www#www#open_reference(expand("<cWORD>"))<CR>
+   nnoremap <leader>wo :call www#www#open_reference(expand("<cWORD>"))<CR>
    "Open visual selection as url reference
-   vnoremap <leader>wb :call www#www#open_reference(@*)<CR>
+   vnoremap <leader>wo :call www#www#open_reference(@*)<CR>
    "Search with default search engine WORD under the cursor
    nnoremap <leader>ws :call www#www#default_search(expand("<cWORD>"))<CR>
    "Search with default search engine visual selection
