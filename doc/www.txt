@@ -17,9 +17,9 @@ USAGE                                                               *www-usage*
 three types of url references:
 
 * A typical URI, e.g. http://vim.org .
-* A defined plain tag. E.g., tag {vimcom} can be configured to
+* A defined plain tag. E.g., tag "vimcom" can be configured to
  reference http://www.vim.org/community.php .
-* A defined search engine tag. E.g., tag {g?} can be configured to
+* A defined search engine tag. E.g., tag "g?" can be configured to
  search in google a query that can be provided.
 
 Tags can be configured creating the dictionary |g:www_urls| in your .vimrc.
@@ -39,7 +39,7 @@ To open those urls you use the command |:Wopen|, which accepts a url
 reference as argument. E.g.: >
     
     :Wopen http://vim.org
-    :Wopen vim
+    :Wopen vimcom
     :Wopen g?vim scripts
 <
 Above commands will open http://vim.org, http://www.vim.org/community.php urls
@@ -47,7 +47,7 @@ and the resulting url of searching the string "vim scripts" in google,
 respectively.
 
 If you preffer you can use |:Wopenmulti| command to open multiple urls in
-one step. But please notice that, as it is a multiple arguments command, you must
+one step. But, please, notice that, as it is a multiple arguments command, you must
 scape blankspaces in the string you provide to search engines. E.g: >
 
     :Wopenmulti http://vim.org vim g?vim\ scripts
@@ -84,17 +84,17 @@ text selection.
 ==============================================================================
 COMMANDS                                                         *www-commands*
 
-                                                                      *:Wopen1*
+                                                                      *:Wopen*
 
 :Wopen {urlreference} Opens {urlreference} in your browser. Url reference can
 be a common URI, like "http://google.es", a plain tag, like "vim", or a search
 engine tag, like "g?" followed by a search query (like "g?vim scripts"). Look
  at |g:www_urls| for information about how and where define tags.
 
-                                                                       *:Wopen*
+                                                                 *:Wopenmulti*
 
 :Wopenmulti {urlreference} [{urlreference}...] Opens url references in your
-browser. Look at |:Wopen1| for information about {urlreference} values.
+browser. Look at |:Wopen| for information about {urlreference} values.
 
                                                                      :Wsession
 
@@ -114,7 +114,7 @@ MAPPINGS                                                         *www-mappings*
 
 <leader>wo In normal mode opens the |WORD| under the cursor as a url
 reference. In visual mode, does the same with the text selection. Look at
- |:Wopen1| for information about what a url reference can be.
+ |:Wopen| for information about what a url reference can be.
 
 
                                                                   *<leader>ws*
@@ -149,11 +149,11 @@ placeholder. E.g.: >
          \ 'gh?': 'https://github.com/search?q={{QUERY}}&ref=simplesearch'
     \ }
 <
-                                                                  *g:sessions*
+                                                              *g:www_sessions*
 
 A dictionary that contains your sessions. Keys are words without spaces and
 values are lists of plain tags or search engine tags with their search query.
-Tags have to be defined in |g:www_urls| or in www.vim defaults. E.g.: >
+Tags have to be defined in |g:www_urls| or in |www.vim| defaults. E.g.: >
 
     let g:www_sessions = {
         \ 'vim': ['vim', 'g?vim scriping']
@@ -162,12 +162,12 @@ Tags have to be defined in |g:www_urls| or in www.vim defaults. E.g.: >
                                                  *g:www_default_search_engine*
 
 Default search engine to use. The value is a search engine tag, like "g?" or
-"y?" present in |g:www_urls| or in www.vim defaults.
+"y?" present in |g:www_urls| or in |www.vim| defaults.
 
                                                 *g:www_launch_browser_command*
 
 The command that will be used to launch your browser. If it is not set
-(default), www.vim will try to make the best guess. Use "{{URL}}" placeholder
+(default), |www.vim| will try to make the best guess. Use "{{URL}}" placeholder
 to tell where the actual url should be. E.g.: >
 
     let g:www_launch_browser_command = "icewasel {{URL}} &"
