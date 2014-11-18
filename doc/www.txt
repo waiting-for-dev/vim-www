@@ -35,20 +35,22 @@ Notice that search engine tags end with a "?" character and that the search
 query will be appended to the defined url (look at |g:www_urls| for more
 details).
 
-To open those urls you use the command |:Wopen|, which accepts multiple
-arguments in order to open multiple urls. E.g.: >
+To open those urls you use the command |:Wopen|, which accepts a url
+reference as argument. E.g.: >
     
-    :Wopen http://vim.org vim g?vim\ scripts
+    :Wopen http://vim.org
+    :Wopen vim
+    :Wopen g?vim scripts
 <
-Above command will open http://vim.org, http://www.vim.org/community.php urls
-and the resulting url of searching the string "vim scripts" in google.
+Above commands will open http://vim.org, http://www.vim.org/community.php urls
+and the resulting url of searching the string "vim scripts" in google,
+respectively.
 
-Notice that as it is a multiple arguments command you must scape blankspaces
-in the string you provide to google search engine. Just for a matter of
-convenience there is also the |:Wopen1| command which only accepts one
-argument: >
+If you preffer you can use |:Wopenmulti| command to open multiple urls in
+one step. But please notice that, as it is a multiple arguments command, you must
+scape blankspaces in the string you provide to search engines. E.g: >
 
-    :Wopen1 g?vim scripts
+    :Wopenmulti http://vim.org vim g?vim\ scripts
 <
 You can also configure google or any other as your default search engine,
 through: >
@@ -84,14 +86,14 @@ COMMANDS                                                         *www-commands*
 
                                                                       *:Wopen1*
 
-:Wopen1 {urlreference} Opens {urlreference} in your browser. Url reference can
+:Wopen {urlreference} Opens {urlreference} in your browser. Url reference can
 be a common URI, like "http://google.es", a plain tag, like "vim", or a search
 engine tag, like "g?" followed by a search query (like "g?vim scripts"). Look
  at |g:www_urls| for information about how and where define tags.
 
                                                                        *:Wopen*
 
-:Wopen {urlreference} [{urlreference}...] Opens url references in your
+:Wopenmulti {urlreference} [{urlreference}...] Opens url references in your
 browser. Look at |:Wopen1| for information about {urlreference} values.
 
                                                                      :Wsession
@@ -212,4 +214,4 @@ CONTRIBUTING                                                 *www-contributing*
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-www.vim vim:tw=78:ts=8:ft=help:norl:
+  www.vim vim:tw=78:ts=8:ft=help:norl:

@@ -12,14 +12,14 @@ let g:loaded_www = "0.0.1"
 let s:save_cpo = &cpo
 set cpo&vim
 
-"Open one or more url references
+"Open one url reference
 if !exists(":Wopen")
-   command -complete=custom,www#complete_helper#tags -nargs=+ Wopen :call www#www#open_references(<f-args>)
+   command -complete=custom,www#complete_helper#tags -nargs=1 Wopen :call www#www#open_reference(<f-args>)
 endif
 
-"Open one url reference
-if !exists(":Wopen1")
-   command -complete=custom,www#complete_helper#tags -nargs=1 Wopen1 :call www#www#open_reference(<f-args>)
+"Open one or more url references
+if !exists(":Wopenmulti")
+   command -complete=custom,www#complete_helper#tags -nargs=+ Wopenmulti :call www#www#open_references(<f-args>)
 endif
 
 "Search using default search engine
