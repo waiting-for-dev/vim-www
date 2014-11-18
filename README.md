@@ -14,35 +14,45 @@ This plugin is born out of my need to open every now and then the same documenta
 
 Tags can be configured creating the dictionary `g:www_urls` in your `.vimrc`. E.g.:
 
-    let g:www_urls = {
-             \ 'vimcom' : 'http://www.vim.org/community.php',
-             \ 'g?' : 'https://www.google.com/search?q=',
-             \
-             \ }
+```vim
+let g:www_urls = {
+         \ 'vimcom' : 'http://www.vim.org/community.php',
+         \ 'g?' : 'https://www.google.com/search?q=',
+         \
+         \ }
+```
 
 Notice that search engine tags end with a `?` character and that the search query will be appended to the defined url.
 
 To open those urls you use the command `:Wopen`, which accepts a url reference as argument. E.g.:
     
-    :Wopen http://vim.org
-    :Wopen vimcom
-    :Wopen g?vim scripts
+```vim
+:Wopen http://vim.org
+:Wopen vimcom
+:Wopen g?vim scripts
+```
 
 Above commands will open http://vim.org, http://www.vim.org/community.php urls and the resulting url of searching the string "vim scripts" in google, respectively.
 
 If you preffer you can use `:Wopenmulti` command to open multiple urls in one step. But, please, notice that, as it is a multiple arguments command, you must scape blankspaces in the string you provide to search engines. E.g:
 
-    :Wopenmulti http://vim.org vim g?vim\ scripts
+```vim
+:Wopenmulti http://vim.org vim g?vim\ scripts
+```
 
 ### Default search engine
 
 You can also configure google or any other as your default search engine, through:
 
-    let g:www_default_search_engine = 'g?'
+```vim
+let g:www_default_search_engine = 'g?'
+```
 
 and then you can just do:
 
-    :Wsearch vim scripts
+```vim
+:Wsearch vim scripts
+```
 
 By default, google will be used.
 
@@ -50,14 +60,18 @@ By default, google will be used.
 
 Urls can also be grouped in sessions in the following way:
 
-    let g:www_sessions = {
-             \ 'vim' : ['http://vim.org', 'vimcom', 'g?vim scripts'],
-             \
-             \ }
+```vim
+let g:www_sessions = {
+         \ 'vim' : ['http://vim.org', 'vimcom', 'g?vim scripts'],
+         \
+         \ }
+```
 
 Then you can open in one step all referenced urls with:
 
-    :Wsession vim
+```vim
+:Wsession vim
+```
 
 ### Mappings
 
