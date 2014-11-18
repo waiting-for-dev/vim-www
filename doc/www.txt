@@ -10,7 +10,8 @@ CONTENTS                                              *www.vim* *www-contents*
 5. Configuration ........ |www-configuration|
 6. Bugs ................. |www-bugs|
 7. Contributing ......... |www-contributing|
-8. License .............. |www-license|
+8. Version .............. |www-version|
+9. License .............. |www-license|
 ==============================================================================
 USAGE                                                               *www-usage*
 
@@ -211,6 +212,11 @@ CONTRIBUTING                                                 *www-contributing*
 5. Create new Pull Request
 
   www.vim vim:tw=78:ts=8:ft=help:norl:
+==============================================================================
+VERSION                                                           *www-version*
+
+|www.vim| follows semantic versioning system (http://semver.org/). Current
+version is 0.0.1.
 ==============================================================================
 LICENSE                                                           *www-license*
 

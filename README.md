@@ -101,6 +101,10 @@ Open a bug in https://github.com/waiting-for-dev/www.vim/issues
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+### Version
+
+www.vim follows [semantic versioning system](http://semver.org/). Current version is 0.0.1.
+
 ### License
 
 The MIT Licence
