@@ -57,7 +57,7 @@ scape blankspaces in the string you provide to search engines. E.g: >
 You can also configure google or any other as your default search engine,
 through: >
 
-    let g:www_default_search_engine = 'g?
+    let g:www_default_search_engine = 'g?'
 >
 and then you can just do: >
 

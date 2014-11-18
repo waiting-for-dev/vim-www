@@ -38,7 +38,7 @@ If you preffer you can use `:Wopenmulti` command to open multiple urls in one st
 
 You can also configure google or any other as your default search engine, through:
 
-    let g:www_default_search_engine = 'g?
+    let g:www_default_search_engine = 'g?'
 
 and then you can just do:
 
@@ -69,7 +69,7 @@ There are also some convenient mappings:
 
 ## Defaults
 
-Some search engines are already provided by default by |www.vim|. Here it is the current relation:
+Some search engines are already provided by default by www.vim. Here it is the current relation:
 
 | Tag   | Website                  |
 |-------|--------------------------|
