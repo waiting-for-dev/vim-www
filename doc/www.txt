@@ -4,12 +4,13 @@
 CONTENTS                                              *www.vim* *www-contents*
 
 1. Usage ................ |www-usage|
-2. Commands ............. |www-commands|
-3. Mappings ............. |www-mappings|
-4. Configuration ........ |www-configuration|
-5. License .............. |www-license|
-6. Bugs ................. |www-bugs|
-7. Contributing ......... |www-contributing|
+2. Defaults ............. |www-defaults|
+3. Commands ............. |www-commands|
+4. Mappings ............. |www-mappings|
+5. Configuration ........ |www-configuration|
+6. License .............. |www-license|
+7. Bugs ................. |www-bugs|
+8. Contributing ......... |www-contributing|
 ==============================================================================
 USAGE                                                               *www-usage*
 
@@ -81,6 +82,24 @@ your text selection.
 * |<leader>ws| . In normal mode it will search the |WORD| under the cursor in
  your default search engine. In visual mode it will do the same with your
 text selection.
+==============================================================================
+DEFAULTS                                                         *www-defaults*
+
+Some search engines are already provided by default by |www.vim|. Here it is
+the current relation:
+
+                     | Tag   | Website                  |
+                     ------------------------------------
+                     | g?    | https://google.com       |
+                     | y?    | http://youtube.com       |
+                     | gh?   | https://github.com       |
+                     | bb?   | https://bitbucket.org    |
+                     | so?   | http://stackoverflow.com |
+                     | wiki? | http://en.wikipedia.org  |
+                     | imdb? | http://www.imdb.com      |
+
+Remember you can overwrite these defaults and define new ones with
+|g:www_urls|.
 ==============================================================================
 COMMANDS                                                         *www-commands*
 
