@@ -4,6 +4,10 @@ Define your favourite websites and search engines and open them from vim.
 
 This plugin is born out of my need to open every now and then the same documentation websites while I'm programming, of the chaos that represents keeping all of them open in browser tabs at the same time and of the mental gap saving if I can open them directly from vim.
 
+## Installation
+
+Just like any other vim plugin. Use [pathogen](https://github.com/tpope/vim-pathogen), [neobundle](https://github.com/Shougo/neobundle.vim) or [vundle](https://github.com/gmarik/Vundle.vim), or just [unzip](https://github.com/waiting-for-dev/www.vim/archive/master.zip) it inside your `$HOME/.vim` directory.
+
 ## Usage
 
 `www.vim` just opens urls in your web browser. But `www.vim` understands three types of url references:
