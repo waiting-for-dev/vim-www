@@ -1,5 +1,7 @@
 *www.txt* Plugin to open enriched urls from vim
 
+Official repository: https://github.com/waiting-for-dev/www.vim
+
 ==============================================================================
 CONTENTS                                              *www.vim* *www-contents*
 
