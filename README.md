@@ -121,7 +121,7 @@ Open a bug in https://github.com/waiting-for-dev/vim-www/issues
 
 ### Version
 
-vim-www follows [Semantic Versioning System 2.0](http://semver.org/). Current version is 0.0.2.
+vim-www follows [Semantic Versioning System 2.0](http://semver.org/). Current version is 0.0.3.
 
 ### License
 
