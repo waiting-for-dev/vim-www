@@ -15,13 +15,13 @@ function! www#url_handler#handle(url) "{{{
       return
     endif
   endtry
-  echomsg '[www.vim] An error has occurred trying to launch de browser'
+  echomsg '[vim-www] An error has occurred trying to launch de browser'
 endfunction "}}}
 
 "Open given url in a browser using user custom command
 function! www#url_handler#handle_custom(url)
    if !exists('g:www_launch_browser_command')
-      echomsg '[www.vim] To use a custom url handler you must define g:www_launch_browser_command'
+      echomsg '[vim-www] To use a custom url handler you must define g:www_launch_browser_command'
    else
       execute 'silent ! '.substitute(g:www_launch_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
       redraw!

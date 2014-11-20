@@ -1,16 +1,16 @@
-# www.vim
+# vim-www
 
-Define your favourite websites and search engines and open them from vim. Official repository: https://github.com/waiting-for-dev/www.vim
+Define your favourite websites and search engines and open them from vim. Official repository: https://github.com/waiting-for-dev/vim-www
 
 This plugin is born out of my need to open every now and then the same documentation websites while I'm programming, of the chaos that represents keeping all of them open in browser tabs at the same time and of the mental gap saving if I can open them directly from vim.
 
 ## Installation
 
-Just like any other vim plugin. Use [pathogen](https://github.com/tpope/vim-pathogen), [neobundle](https://github.com/Shougo/neobundle.vim) or [vundle](https://github.com/gmarik/Vundle.vim), or just [unzip](https://github.com/waiting-for-dev/www.vim/archive/master.zip) it inside your `$HOME/.vim` directory.
+Just like any other vim plugin. Use [pathogen](https://github.com/tpope/vim-pathogen), [neobundle](https://github.com/Shougo/neobundle.vim) or [vundle](https://github.com/gmarik/Vundle.vim), or just [unzip](https://github.com/waiting-for-dev/vim-www/archive/master.zip) it inside your `$HOME/.vim` directory.
 
 ## Usage
 
-`www.vim` just opens urls in your web browser. But `www.vim` understands three types of url references:
+`vim-www` just opens urls in your web browser. But `vim-www` understands three types of url references:
 
 * A typical URI, e.g. http://vim.org .
 * A defined plain tag. E.g., tag "vimcom" can be configured to reference http://www.vim.org/community.php .
@@ -87,7 +87,7 @@ There are also some convenient mappings:
 
 ## Defaults
 
-Some search engines are already provided by default by www.vim. Here it is the current relation:
+Some search engines are already provided by default by vim-www. Here it is the current relation:
 
 | Tag   | Website                  |
 |-------|--------------------------|
@@ -105,15 +105,15 @@ You can overwrite these defaults and define new ones with `g:www_urls`.
 
 ### Configuration and reference
 
-Type `:help www.vim` for a complete reference and information about configuration.
+Type `:help vim-www` for a complete reference and information about configuration.
 
 ### BUGS
 
-Open a bug in https://github.com/waiting-for-dev/www.vim/issues
+Open a bug in https://github.com/waiting-for-dev/vim-www/issues
 
 ### Contributing
 
-1. Fork the project ( http://github.com/waiting-for-dev/www.vim/fork )
+1. Fork the project ( http://github.com/waiting-for-dev/vim-www/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -121,7 +121,7 @@ Open a bug in https://github.com/waiting-for-dev/www.vim/issues
 
 ### Version
 
-www.vim follows [Semantic Versioning System 2.0](http://semver.org/). Current version is 0.0.1.
+vim-www follows [Semantic Versioning System 2.0](http://semver.org/). Current version is 0.0.2.
 
 ### License
 

@@ -34,7 +34,7 @@ endfunction
 
 "Inform a tag is not present
 function! www#url_helper#inform_tag_no_present(tag)
-   echomsg "[www.vim]: Tag ".a:tag." is not defined in g:www_urls"
+   echomsg "[vim-www]: Tag ".a:tag." is not defined in g:www_urls"
 endfunction
 
 "Get tag dictionary; that's a merge between www defaults and user preferences

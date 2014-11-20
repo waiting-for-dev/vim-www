@@ -1,9 +1,9 @@
 *www.txt* Plugin to open enriched urls from vim
 
-Official repository: https://github.com/waiting-for-dev/www.vim
+Official repository: https://github.com/waiting-for-dev/vim-www
 
 ==============================================================================
-CONTENTS                                              *www.vim* *www-contents*
+CONTENTS                                   *vim-www* *www.vim* *www-contents*
 
 1. Usage ................ |www-usage|
 2. Defaults ............. |www-defaults|
@@ -17,7 +17,7 @@ CONTENTS                                              *www.vim* *www-contents*
 ==============================================================================
 USAGE                                                               *www-usage*
 
-|www.vim| just opens urls in your web browser. But |www.vim| understands
+|vim-www| just opens urls in your web browser. But |vim-www| understands
 three types of url references:
 
 * A typical URI, e.g. http://vim.org .
@@ -90,7 +90,7 @@ text selection.
 ==============================================================================
 DEFAULTS                                                         *www-defaults*
 
-Some search engines are already provided by default by |www.vim|. Here it is
+Some search engines are already provided by default by |vim-www|. Here it is
 the current relation:
 
                      | Tag   | Website                  |
@@ -178,7 +178,7 @@ placeholder. E.g.: >
 
 A dictionary that contains your sessions. Keys are words without spaces and
 values are lists of plain tags or search engine tags with their search query.
-Tags have to be defined in |g:www_urls| or in |www.vim| defaults. E.g.: >
+Tags have to be defined in |g:www_urls| or in |vim-www| defaults. E.g.: >
 
     let g:www_sessions = {
         \ 'vim': ['vim', 'g?vim scriping']
@@ -187,12 +187,12 @@ Tags have to be defined in |g:www_urls| or in |www.vim| defaults. E.g.: >
                                                  *g:www_default_search_engine*
 
 Default search engine to use. The value is a search engine tag, like "g?" or
-"y?" present in |g:www_urls| or in |www.vim| defaults.
+"y?" present in |g:www_urls| or in |vim-www| defaults.
 
                                                 *g:www_launch_browser_command*
 
 The command that will be used to launch your browser. If it is not set
-(default), |www.vim| will try to make the best guess. Use "{{URL}}" placeholder
+(default), |vim-www| will try to make the best guess. Use "{{URL}}" placeholder
 to tell where the actual url should be. E.g.: >
 
     let g:www_launch_browser_command = "icewasel {{URL}} &"
@@ -203,22 +203,21 @@ Set this variable to 0 if you don't want |www-mappings| to be used.
 ==============================================================================
 BUGS                                                                 *www-bugs*
 
-Open a bug in https://github.com/waiting-for-dev/www.vim/issues
+Open a bug in https://github.com/waiting-for-dev/vim-www/issues
 ==============================================================================
 CONTRIBUTING                                                 *www-contributing*
 
-1. Fork the project ( http://github.com/waiting-for-dev/www.vim/fork )
+1. Fork the project ( http://github.com/waiting-for-dev/vim-www/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-  www.vim vim:tw=78:ts=8:ft=help:norl:
 ==============================================================================
 VERSION                                                           *www-version*
 
-|www.vim| follows Semantic Versioning system 2.0 (http://semver.org/). Current
-version is 0.0.1.
+|vim-www| follows Semantic Versioning system 2.0 (http://semver.org/). Current
+version is 0.0.2.
 ==============================================================================
 LICENSE                                                           *www-license*
 
@@ -244,3 +243,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+  vim-www vim:tw=78:ts=8:ft=help:norl:

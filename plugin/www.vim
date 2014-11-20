@@ -1,13 +1,13 @@
 " Vim global plugin for opening in a web browser user defined favorite pages
 " and search engine results
 " Maintainer:	Marc Busqué <marc@lamarciana.com>
-" Repository: http://github.com/waiting-for-dev/www.vim
+" Repository: http://github.com/waiting-for-dev/vim-www
 
 if exists("g:loaded_www")
    finish
 endif
 
-let g:loaded_www = "0.0.1"
+let g:loaded_www = "0.0.2"
 
 let s:save_cpo = &cpo
 set cpo&vim

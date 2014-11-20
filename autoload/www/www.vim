@@ -22,7 +22,7 @@ endfunction
 function! www#www#open_session(session_name)
    let session_dict = www#url_helper#get_session_dictionary()
    if !has_key(session_dict, a:session_name)
-      echomsg "[www.vim]: Session ".a:session_name." is not defined in g:www_sessions"
+      echomsg "[vim-www]: Session ".a:session_name." is not defined in g:www_sessions"
    else
       call call('www#www#open_references', session_dict[a:session_name])
    endif
@@ -31,7 +31,7 @@ endfunction
 "Search using default search engine
 function! www#www#default_search(query)
    if !exists('g:www_default_search_engine')
-      echomsg "[www.vim] There is not default search engine configured in g:www_default_search_engine"
+      echomsg "[vim-www] There is not default search engine configured in g:www_default_search_engine"
    else
       call www#www#open_reference(www#url_helper#get_default_search_engine().a:query)
    endif
