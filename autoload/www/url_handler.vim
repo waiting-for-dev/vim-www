@@ -40,5 +40,5 @@ endfunction
 
 "Open given url in a browser in linux
 function! www#url_handler#handle_in_linux(url)
-   call system('xdg-open ' . shellescape(a:url, 1).' &')
+   call system('xdg-open ' . shellescape(a:url).' &')
 endfunction
