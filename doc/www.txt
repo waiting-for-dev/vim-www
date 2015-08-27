@@ -87,6 +87,9 @@ your text selection.
 * |<leader>ws| . In normal mode it will search the |WORD| under the cursor in
  your default search engine. In visual mode it will do the same with your
 text selection.
+
+Notice than, in all cases, url's without "://" on them will have automatically
+"http://" prepended.
 ==============================================================================
 DEFAULTS                                                         *www-defaults*
 
@@ -113,8 +116,10 @@ COMMANDS                                                         *www-commands*
 
 :Wopen {urlreference} Opens {urlreference} in your browser. Url reference can
 be a common URI, like "http://google.es", a plain tag, like "vim", or a search
-engine tag, like "g?" followed by a search query (like "g?vim scripts"). Look
- at |g:www_urls| for information about how and where define tags.
+engine tag, like "g?" followed by a search query (like "g?vim scripts"). When
+{urlreference} is neither a tag, nor a seach engine tag, nor contains "://" in
+it, "http://" will be prepended to it. Look at |g:www_urls| for information
+about how and where define tags.
 
                                                                  *:Wopenmulti*
 

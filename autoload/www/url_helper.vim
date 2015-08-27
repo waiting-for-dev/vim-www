@@ -1,13 +1,18 @@
 "Given a url reference, return the actual url
 function! www#url_helper#get_url_from_ref(ref)
-   let tag_dict = www#url_helper#get_tag_dictionary()
-   if a:ref =~ "\?"
-      return www#url_helper#get_url_for_search_engine(a:ref, tag_dict)
-   elseif has_key(tag_dict, a:ref)
-      return www#url_helper#get_url_for_plain_tag(a:ref, tag_dict)
-   else
-      return a:ref
-   endif
+  let tag_dict = www#url_helper#get_tag_dictionary()
+  if a:ref =~ "\?"
+    let url = www#url_helper#get_url_for_search_engine(a:ref, tag_dict)
+  elseif has_key(tag_dict, a:ref)
+    let url = www#url_helper#get_url_for_plain_tag(a:ref, tag_dict)
+  else
+    let url = a:ref
+  endif
+  if url =~ "://"
+    return url
+  else
+    return "http://".url
+  end
 endfunction
 
 "Given a search engine reference, return the actual url
