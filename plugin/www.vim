@@ -27,6 +27,11 @@ if !exists(":Wsearch")
    command -nargs=1 Wsearch call www#www#default_search(<f-args>)
 endif
 
+"Search using search engine provided by user input
+if !exists(":Wengine")
+   command -nargs=1 Wengine call www#www#search(<f-args>)
+endif
+
 "Open one or more sessions
 if !exists(":Wsession")
    command -complete=custom,www#complete_helper#sessions -nargs=+ Wsession :call www#www#open_sessions(<f-args>)

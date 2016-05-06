@@ -36,3 +36,14 @@ function! www#www#default_search(query)
       call www#www#open_reference(www#url_helper#get_default_search_engine().a:query)
    endif
 endfunction
+
+"Search using search engine provided by user input
+function! www#www#search(query)
+  let default_search_engine = www#url_helper#get_default_search_engine()
+  let cmd = input("Enter search engine to be used: [".default_search_engine."]")
+  if empty(cmd)
+    call www#www#default_search(a:query)
+  else
+    call www#www#open_reference(cmd.a:query)
+  end
+endfunction
