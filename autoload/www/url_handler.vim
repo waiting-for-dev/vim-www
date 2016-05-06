@@ -16,7 +16,7 @@ function! www#url_handler#handle(url) "{{{
     endif
   endtry
   echomsg '[vim-www] An error has occurred trying to launch de browser'
-endfunction "}}}
+endfunction
 
 "Open given url in a browser using user custom command
 function! www#url_handler#handle_custom(url)
