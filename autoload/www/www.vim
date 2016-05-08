@@ -28,6 +28,13 @@ function! www#www#search(engine, query)
   end
 endfunction
 
+"Calls www#www#open_session for each given argument
+function! www#www#open_sessions(...)
+   for session in a:000
+      call www#www#open_session(session)
+   endfor
+endfunction
+
 "Open a session
 function! www#www#open_session(session_name)
    let session_dict = www#url_helper#get_session_dictionary()

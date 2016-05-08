@@ -38,7 +38,7 @@ endfunction
 "Get session dictionary; that's a merge between www defaults and user preferences
 function! www#url_helper#get_session_dictionary()
    if exists('g:www_sessions')
-      return g:www#sessions
+      return g:www_sessions
    else
       return {}
    endif
