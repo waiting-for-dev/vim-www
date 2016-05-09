@@ -47,10 +47,10 @@ endfunction
 
 "Search using default search engine
 function! www#www#default_search(cli, query)
-   if !exists('g:www_default_search_engine')
-      echomsg "[vim-www] There is not default search engine configured in g:www_default_search_engine"
-   else
+   if exists('g:www_default_search_engine')
       call www#www#search(a:cli, g:www_default_search_engine, a:query)
+   else
+      call www#www#search(a:cli, g:www#defaults#search_engine, a:query)
    endif
 endfunction
 
