@@ -8,3 +8,6 @@ let g:www#defaults#engines = {
          \ 'wikipedia' : 'http://en.wikipedia.org/w/index.php?search=',
          \ 'imdb' : 'http://www.imdb.com/find?s=all&q=',
          \ }
+
+" Default search engine
+let g:www#defaults#search_engine = 'google'
