@@ -1,7 +1,10 @@
 "Open given url in a browser
-function! www#url_handler#handle(url) "{{{
+function! www#url_handler#handle(cli, url) "{{{
   try 
-    if exists('g:www_launch_browser_command')
+    if a:cli
+      call www#url_handler#handle_cli(a:url)
+      return
+    elseif exists('g:www_launch_browser_command')
       call www#url_handler#handle_custom(a:url)
       return
     elseif www#system_helper#is_windows()
@@ -25,6 +28,20 @@ function! www#url_handler#handle_custom(url)
    else
       execute 'silent ! '.substitute(g:www_launch_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
       redraw!
+   endif
+endfunction
+
+"Open given url in a cli browser configured by the user
+function! www#url_handler#handle_cli(url)
+   if !exists('g:www_launch_cli_browser_command')
+      echomsg '[vim-www] To use cli url handler you must define g:www_launch_cli_browser_command'
+   else
+     if exists('g:loaded_dispatch')
+       execute 'Dispatch '.substitute(g:www_launch_cli_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
+       redraw!
+     else
+      echomsg '[vim-www] To use cli url handler you must have installed dispatch.vim'
+     end
    endif
 endfunction
 
