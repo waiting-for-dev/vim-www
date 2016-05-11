@@ -23,11 +23,11 @@ endif
 
 "Search using search engine provided by user input
 if !exists(":Wsearch")
-   command -complete=custom,www#complete_helper#engines -nargs=+ Wsearch call www#www#search_from_command(0, <f-args>)
+   command -complete=custom,www#complete_helper#engines_from_command -nargs=+ Wsearch call www#www#search_from_command(0, <f-args>)
 endif
 
 if !exists(":Wcsearch")
-   command -complete=custom,www#complete_helper#engines -nargs=+ Wcsearch call www#www#search_from_command(1, <f-args>)
+   command -complete=custom,www#complete_helper#engines_from_command -nargs=+ Wcsearch call www#www#search_from_command(1, <f-args>)
 endif
 
 "Search using default search engine
