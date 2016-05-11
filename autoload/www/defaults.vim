@@ -1,4 +1,4 @@
-" Default engines dictionary
+" Default search engines dictionary
 let g:www#defaults#engines = {
          \ 'google' : 'https://www.google.com/search?q=',
          \ 'yahoo' : 'http://www.youtube.com/results?search_query=',

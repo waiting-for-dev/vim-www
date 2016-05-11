@@ -26,16 +26,16 @@ function! www#url_helper#get_urls_dictionary()
    endif
 endfunction
 
-"Get search engines dictionary; that's a merge between www defaults and user preferences
+"Get search engines dictionary; that's a merge between defaults and user preferences
 function! www#url_helper#get_engines_dictionary()
    if exists('g:www_engines')
       return extend(g:www#defaults#engines, g:www_engines)
    else
-      return g:www_default_engines
+      return g:www#default#engines
    endif
 endfunction
 
-"Get session dictionary; that's a merge between www defaults and user preferences
+"Get session dictionary
 function! www#url_helper#get_session_dictionary()
    if exists('g:www_sessions')
       return g:www_sessions
@@ -44,7 +44,7 @@ function! www#url_helper#get_session_dictionary()
    endif
 endfunction
 
-"Get default search engine; that's www default or user preference
+"Get default search engine; that's an user preference or default one
 function! www#url_helper#get_default_search_engine()
    if exists('g:www_default_search_engine')
       return g:www_default_search_engine

@@ -1,5 +1,7 @@
-"Open given url in a browser
-function! www#url_handler#handle(cli, url) "{{{
+"Open given url in a browser. If cli is 1 it will be in the configured cli
+"browser. If 0 it will be in the configured browser or, if not set, it will
+"try to guess the command to use
+function! www#url_handler#handle(cli, url)
   try 
     if a:cli
       call www#url_handler#handle_cli(a:url)
@@ -18,31 +20,25 @@ function! www#url_handler#handle(cli, url) "{{{
       return
     endif
   endtry
-  echomsg '[vim-www] An error has occurred trying to launch de browser'
+  echomsg '[vim-www] An error has occurred trying to launch the browser'
 endfunction
 
 "Open given url in a browser using user custom command
 function! www#url_handler#handle_custom(url)
-   if !exists('g:www_launch_browser_command')
-      echomsg '[vim-www] To use a custom url handler you must define g:www_launch_browser_command'
-   else
-      execute 'silent ! '.substitute(g:www_launch_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
-      redraw!
-   endif
+  execute 'silent ! '.substitute(g:www_launch_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
+  redraw!
 endfunction
 
 "Open given url in a cli browser configured by the user
 function! www#url_handler#handle_cli(url)
-   if !exists('g:www_launch_cli_browser_command')
-      echomsg '[vim-www] To use cli url handler you must define g:www_launch_cli_browser_command'
-   else
-     if exists('g:loaded_dispatch')
-       execute 'Dispatch '.substitute(g:www_launch_cli_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
-       redraw!
-     else
-      echomsg '[vim-www] To use cli url handler you must have installed dispatch.vim'
-     end
-   endif
+  if !exists('g:www_launch_cli_browser_command')
+    echomsg '[vim-www] To use cli url handler you must define g:www_launch_cli_browser_command'
+  elseif !exists('g:loaded_dispatch')
+    echomsg '[vim-www] To use cli url handler you must have installed dispatch.vim'
+  else
+    execute 'Dispatch '.substitute(g:www_launch_cli_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
+    redraw!
+  endif
 endfunction
 
 "Open given url in a browser in windows

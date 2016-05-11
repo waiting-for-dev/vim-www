@@ -17,17 +17,19 @@ if !exists(":Wopen")
    command -complete=custom,www#complete_helper#urls -nargs=+ Wopen :call www#www#open_urls(0, <f-args>)
 endif
 
+"Open given urls using cli browser
 if !exists(":Wcopen")
    command -complete=custom,www#complete_helper#urls -nargs=+ Wcopen :call www#www#open_urls(1, <f-args>)
 endif
 
-"Search using search engine provided by user input
+"Search using given search engine
 if !exists(":Wsearch")
-   command -complete=custom,www#complete_helper#engines_from_command -nargs=+ Wsearch call www#www#search_from_command(0, <f-args>)
+   command -complete=custom,www#complete_helper#engines_first_argument -nargs=+ Wsearch call www#www#search_from_command(0, <f-args>)
 endif
 
+"Search using given search engine using cli browser
 if !exists(":Wcsearch")
-   command -complete=custom,www#complete_helper#engines_from_command -nargs=+ Wcsearch call www#www#search_from_command(1, <f-args>)
+   command -complete=custom,www#complete_helper#engines_first_argument -nargs=+ Wcsearch call www#www#search_from_command(1, <f-args>)
 endif
 
 "Search using default search engine
@@ -35,6 +37,7 @@ if !exists(":Wdefaultsearch")
    command -nargs=1 Wdefaultsearch call www#www#default_search(0, <f-args>)
 endif
 
+"Search using default search engine using cli browser
 if !exists(":Wcdefaultsearch")
    command -nargs=1 Wcdefaultsearch call www#www#default_search(1, <f-args>)
 endif
@@ -44,6 +47,7 @@ if !exists(":Wsession")
    command -complete=custom,www#complete_helper#sessions -nargs=+ Wsession :call www#www#open_sessions(0, <f-args>)
 endif
 
+"Open one or more sessions using cli browser
 if !exists(":Wcsession")
    command -complete=custom,www#complete_helper#sessions -nargs=+ Wcsession :call www#www#open_sessions(1, <f-args>)
 endif

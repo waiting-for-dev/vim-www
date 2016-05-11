@@ -5,7 +5,7 @@ function! www#www#open_urls(cli, ...)
    endfor
 endfunction
 
-"Open the url associated with given name in urls dict. If no one, treat name as the actual url.
+"Open the url associated with given name in urls dict. If no one, treat name as the actual url. If cli is 1, cli browser will be used
 function! www#www#open_url(cli, name)
   let urls_dict = www#url_helper#get_urls_dictionary()
   if has_key(urls_dict, a:name)
@@ -16,11 +16,14 @@ function! www#www#open_url(cli, name)
   call www#url_handler#handle(a:cli, url)
 endfunction
 
+"Wrapper to allow searching from a command considering the tail of arguments
+"as a string with spaces
 function! www#www#search_from_command(cli, engine, ...)
   call www#www#search(a:cli, a:engine, join(a:000))
 endfunction
 
-"Search query in given search engine
+"Search query in given search engine. If cli is 1 open the result in the cli
+"browser
 function! www#www#search(cli, engine, query)
   let engines_dict = www#url_helper#get_engines_dictionary()
   if has_key(engines_dict, a:engine)
@@ -39,7 +42,7 @@ function! www#www#open_sessions(cli, ...)
    endfor
 endfunction
 
-"Open a session
+"Open a session. If cli is 1 open url's in the cli browser
 function! www#www#open_session(session_name, cli)
    let session_dict = www#url_helper#get_session_dictionary()
    if !has_key(session_dict, a:session_name)
@@ -51,14 +54,11 @@ endfunction
 
 "Search using default search engine
 function! www#www#default_search(cli, query)
-   if exists('g:www_default_search_engine')
-      call www#www#search(a:cli, g:www_default_search_engine, a:query)
-   else
-      call www#www#search(a:cli, g:www#defaults#search_engine, a:query)
-   endif
+  call www#www#search(a:cli, www#url_helper#get_default_search_engine(), a:query)
 endfunction
 
-"Search using search engine provided by user input
+"Search using search engine provided by user input. Use default search engine
+"if none is given
 function! www#www#user_input_search(cli, query)
   let default_search_engine = www#url_helper#get_default_search_engine()
   let cmd = input("Enter search engine to be used [".default_search_engine."]: ", "", "custom,www#complete_helper#engines")
