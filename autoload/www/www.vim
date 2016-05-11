@@ -16,6 +16,10 @@ function! www#www#open_url(cli, name)
   call www#url_handler#handle(a:cli, url)
 endfunction
 
+function! www#www#search_from_command(cli, engine, ...)
+  call www#www#search(a:cli, a:engine, join(a:000))
+endfunction
+
 "Search query in given search engine
 function! www#www#search(cli, engine, query)
   let engines_dict = www#url_helper#get_engines_dictionary()
