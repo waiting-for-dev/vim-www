@@ -32,16 +32,6 @@ if !exists(":Wcsearch")
    command -complete=custom,www#complete_helper#engines_first_argument -nargs=+ Wcsearch call www#www#search_from_command(1, <f-args>)
 endif
 
-"Search using default search engine
-if !exists(":Wdefaultsearch")
-   command -nargs=1 Wdefaultsearch call www#www#default_search(0, <f-args>)
-endif
-
-"Search using default search engine using cli browser
-if !exists(":Wcdefaultsearch")
-   command -nargs=1 Wcdefaultsearch call www#www#default_search(1, <f-args>)
-endif
-
 "Open one or more sessions
 if !exists(":Wsession")
    command -complete=custom,www#complete_helper#sessions -nargs=+ Wsession :call www#www#open_sessions(0, <f-args>)
@@ -69,12 +59,6 @@ if g:www_map_keys
    "Search visual selection
    vnoremap <leader>ws :call www#www#user_input_search(0, @*)<CR>
    vnoremap <leader>wcs :call www#www#user_input_search(1, @*)<CR>
-   "Search with default search engine WORD under the cursor
-   nnoremap <leader>wd :call www#www#default_search(expand(0, "<cWORD>"))<CR>
-   nnoremap <leader>wcd :call www#www#default_search(expand(1, "<cWORD>"))<CR>
-   "Search with default search engine visual selection
-   vnoremap <leader>wd :call www#www#default_search(0, @*)<CR>
-   vnoremap <leader>wcd :call www#www#default_search(1, @*)<CR>
 endif
 
 " Define user configured commands and maps that are a shortcut to search using given engines. Definition have to be made in g:www_magic_engines, which have to be a dictionary { engine: map_keys }. For each entry, dynamic W{engine}/Wc{engine} commands, and w{map_keys}/wc{map_keys} normal & visual mappings are defined that work just as Wsearch/Wcsearch and ws/wcs
