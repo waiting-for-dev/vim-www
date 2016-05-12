@@ -77,5 +77,18 @@ if g:www_map_keys
    vnoremap <leader>wcd :call www#www#default_search(1, @*)<CR>
 endif
 
+" Define user configured commands and maps that are a shortcut to search using given engines. Definition have to be made in g:www_magic_engines, which have to be a dictionary { engine: map_keys }. For each entry, dynamic W{engine}/Wc{engine} commands, and w{map_keys}/wc{map_keys} normal & visual mappings are defined that work just as Wsearch/Wcsearch and ws/wcs
+if exists('g:www_magic_engines')
+  for engine in keys(g:www_magic_engines)
+    let map_keys = g:www_magic_engines[engine]
+    execute "command -nargs=1 W".engine." call www#www#search(0, '".engine."', <f-args>)"
+    execute "command -nargs=1 Wc".engine." call www#www#search(1, '".engine."', <f-args>)"
+    execute "nnoremap <leader>w".map_keys." :call www#www#search(0, '".engine."', expand(\"<cWORD>\"))<CR>"
+    execute "nnoremap <leader>wc".map_keys." :call www#www#search(1, '".engine."', expand(\"<cWORD>\"))<CR>"
+    execute "vnoremap <leader>w".map_keys." :call www#www#search(0, '".engine."', @*)<CR>"
+    execute "vnoremap <leader>wc".map_keys." :call www#www#search(1, '".engine."', @*)<CR>"
+  endfor
+endif
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
