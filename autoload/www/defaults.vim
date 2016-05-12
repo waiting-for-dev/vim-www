@@ -1,5 +1,6 @@
 " Default search engines dictionary
 let g:www#defaults#engines = {
+         \ 'duckduckgo' : 'https://duckduckgo.com/?q=',
          \ 'google' : 'https://www.google.com/search?q=',
          \ 'yahoo' : 'http://www.youtube.com/results?search_query=',
          \ 'github' : 'https://github.com/search?utf8=%E2%9C%93&ref=simplesearch&q=',
@@ -10,4 +11,4 @@ let g:www#defaults#engines = {
          \ }
 
 " Default search engine
-let g:www#defaults#search_engine = 'google'
+let g:www#defaults#search_engine = 'duckduckgo'
