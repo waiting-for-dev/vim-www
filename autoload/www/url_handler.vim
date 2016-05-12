@@ -20,7 +20,7 @@ function! www#url_handler#handle(cli, url)
       return
     endif
   endtry
-  echomsg '[vim-www] An error has occurred trying to launch the browser'
+  call www#www#echo_message('An error has occurred trying to launch the browser')
 endfunction
 
 "Open given url in a browser using user custom command
@@ -32,9 +32,9 @@ endfunction
 "Open given url in a cli browser configured by the user
 function! www#url_handler#handle_cli(url)
   if !exists('g:www_launch_cli_browser_command')
-    echomsg '[vim-www] To use cli url handler you must define g:www_launch_cli_browser_command'
+    call www#www#echo_message('To use cli url handler you must define g:www_launch_cli_browser_command')
   elseif !exists('g:loaded_dispatch')
-    echomsg '[vim-www] To use cli url handler you must have installed dispatch.vim'
+    call www#www#echo_message('To use cli url handler you must have installed dispatch.vim')
   else
     execute 'Dispatch '.substitute(g:www_launch_cli_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
     redraw!

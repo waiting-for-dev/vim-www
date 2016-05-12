@@ -31,7 +31,7 @@ function! www#www#search(cli, engine, query)
     let url = www#url_helper#parse_engine_url(dirty_url, a:query)
     call www#url_handler#handle(a:cli, url)
   else
-    echomsg "[vim-www]: Search engine ".a:engine." is not defined in g:www_engines"
+    call www#www#echo_message('Search engine '.a:engine.' is not defined in g:www_engines')
   end
 endfunction
 
@@ -46,7 +46,7 @@ endfunction
 function! www#www#open_session(session_name, cli)
    let session_dict = www#url_helper#get_session_dictionary()
    if !has_key(session_dict, a:session_name)
-      echomsg "[vim-www]: Session ".a:session_name." is not defined in g:www_sessions"
+      call www#www#echo_message('Session '.a:session_name.' is not defined in g:www_sessions')
    else
       call call('www#www#open_urls', [a:cli] + session_dict[a:session_name])
    endif
@@ -67,4 +67,8 @@ function! www#www#user_input_search(cli, query)
   else
     call www#www#search(a:cli, cmd, a:query)
   end
+endfunction
+
+function! www#www#echo_message(message)
+  echomsg '[vim-www]: '.a:message
 endfunction
