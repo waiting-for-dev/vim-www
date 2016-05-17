@@ -31,7 +31,7 @@ function! www#url_helper#get_engines_dictionary()
    if exists('g:www_engines')
       return extend(g:www#defaults#engines, g:www_engines)
    else
-      return g:www#default#engines
+      return g:www#defaults#engines
    endif
 endfunction
 
