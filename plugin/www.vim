@@ -61,16 +61,28 @@ if g:www_map_keys
    vnoremap <leader>wcs :call www#www#user_input_search(1, @*)<CR>
 endif
 
-" Define user configured commands and maps that are a shortcut to search using given engines. Definition have to be made in g:www_magic_engines, which have to be a dictionary { engine: map_keys }. For each entry, dynamic W{engine}/Wc{engine} commands, and w{map_keys}/wc{map_keys} normal & visual mappings are defined that work just as Wsearch/Wcsearch and ws/wcs
+" Define user configured commands and maps that are a shortcut to search using given engines. Definition have to be made in g:www_magic_engines, which have to be a dictionary { engine: [command, mappings, cli_command, cli_mappings]}. For each entry, dynamic {command}/{cli_command} commands, and {mappings}/{cli_mappings} normal & visual mappings are defined that work just as Wsearch/Wcsearch and ws/wcs
 if exists('g:www_magic_engines')
   for engine in keys(g:www_magic_engines)
-    let map_keys = g:www_magic_engines[engine]
-    execute "command -nargs=1 W".engine." call www#www#search(0, '".engine."', <f-args>)"
-    execute "command -nargs=1 Wc".engine." call www#www#search(1, '".engine."', <f-args>)"
-    execute "nnoremap <leader>w".map_keys." :call www#www#search(0, '".engine."', expand(\"<cWORD>\"))<CR>"
-    execute "nnoremap <leader>wc".map_keys." :call www#www#search(1, '".engine."', expand(\"<cWORD>\"))<CR>"
-    execute "vnoremap <leader>w".map_keys." :call www#www#search(0, '".engine."', @*)<CR>"
-    execute "vnoremap <leader>wc".map_keys." :call www#www#search(1, '".engine."', @*)<CR>"
+    let options = g:www_magic_engines[engine]
+    let command = get(options, 0, '')
+    let mapping = get(options, 1, '')
+    let cli_command = get(options, 2, '')
+    let cli_mapping = get(options, 3, '')
+    if !empty(command)
+      execute "command -nargs=1 ".command." call www#www#search(0, '".engine."', <f-args>)"
+    endif
+    if !empty(mapping)
+      execute "nnoremap ".mapping." :call www#www#search(0, '".engine."', expand(\"<cWORD>\"))<CR>"
+      execute "vnoremap ".mapping." :call www#www#search(0, '".engine."', @*)<CR>"
+    endif
+    if !empty(cli_command)
+      execute "command -nargs=1 ".cli_command." call www#www#search(1, '".engine."', <f-args>)"
+    endif
+    if !empty(cli_mapping)
+      execute "nnoremap ".cli_mapping." :call www#www#search(1, '".engine."', expand(\"<cWORD>\"))<CR>"
+      execute "vnoremap ".cli_mapping." :call www#www#search(1, '".engine."', @*)<CR>"
+    end
   endfor
 endif
 
