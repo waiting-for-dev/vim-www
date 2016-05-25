@@ -61,10 +61,10 @@ if g:www_map_keys
    vnoremap <leader>wcs :call www#www#user_input_search(1, @*)<CR>
 endif
 
-" Define user configured commands and maps that are a shortcut to search using given engines. Definition have to be made in g:www_magic_engines, which have to be a dictionary { engine: [command, mappings, cli_command, cli_mappings]}. For each entry, dynamic {command}/{cli_command} commands, and {mappings}/{cli_mappings} normal & visual mappings are defined that work just as Wsearch/Wcsearch and ws/wcs
-if exists('g:www_magic_engines')
-  for engine in keys(g:www_magic_engines)
-    let options = g:www_magic_engines[engine]
+" Define user configured commands and maps that are a shortcut to search using given engines. Definition have to be made in g:www_shortcut_engines, which have to be a dictionary { engine: [command, mappings, cli_command, cli_mappings]}. For each entry, dynamic {command}/{cli_command} commands, and {mappings}/{cli_mappings} normal & visual mappings are defined that work just as Wsearch/Wcsearch and ws/wcs
+if exists('g:www_shortcut_engines')
+  for engine in keys(g:www_shortcut_engines)
+    let options = g:www_shortcut_engines[engine]
     let command = get(options, 0, '')
     let mapping = get(options, 1, '')
     let cli_command = get(options, 2, '')
