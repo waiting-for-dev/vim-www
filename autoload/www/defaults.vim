@@ -1,6 +1,7 @@
 " Default search engines dictionary
 let g:www#defaults#engines = {
          \ 'duckduckgo' : 'https://duckduckgo.com/?q=',
+         \ 'devdocs' : 'https://devdocs.io#q=',
          \ 'google' : 'https://www.google.com/search?q=',
          \ 'github' : 'https://github.com/search?utf8=%E2%9C%93&ref=simplesearch&q=',
          \ 'bitbucket' : 'https://bitbucket.org/repo/all?name=',
