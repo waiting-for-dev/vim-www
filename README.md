@@ -1,8 +1,6 @@
 # vim-www
 
-Define your favourite websites and search engines and open them from vim. Official repository: https://github.com/waiting-for-dev/vim-www
-
-This plugin is born out of my need to open every now and then the same documentation websites while I'm programming, of the chaos that represents keeping all of them open in browser tabs at the same time and of the mental gap saving if I can open them directly from vim.
+Toolbox to open & search URLs from vim
 
 ## Installation
 
@@ -10,108 +8,109 @@ Just like any other vim plugin. Use [pathogen](https://github.com/tpope/vim-path
 
 ## Usage
 
-`vim-www` just opens urls in your web browser. But `vim-www` understands three types of url references:
+vim-www allows launching a web browser from vim to open arbitrary URLs, defined favorites and search engine results.
 
-* A typical URI, e.g. http://vim.org .
-* A defined plain tag. E.g., tag "vimcom" can be configured to reference http://www.vim.org/community.php .
-* A defined search engine tag. E.g., tag "g?" can be configured to search in google a query that can be provided.
+The web browser to be used is detected automatically, but it can be manually set through `g:www_launch_browser_command`, using `{{URL}}}` as placeholder for the actual URL. E.g.:
 
-Tags can be configured creating the dictionary `g:www_urls` in your `.vimrc`. E.g.:
+    let g:www_launch_browser_command = "iceweasel {{URL}} &"
 
-```vim
-let g:www_urls = {
-         \ 'vimcom' : 'http://www.vim.org/community.php',
-         \ 'g?' : 'https://www.google.com/search?q=',
-         \
-         \ }
-```
+In the same way, an alternative CLI browser can be set through `g:www_launch_cli_browser_command`. In order to work, [vim-dispatch](https://github.com/tpope/vim-dispatch) add-on must be installed. Its purpose is to open a web, for example, in a [tmux](https://tmux.github.io/) pane, or in a virtual terminal if [neovim](https://github.com/neovim/neovim) and [vim-dispatch-neovim](https://github.com/radenling/vim-dispatch-neovim) are being used.
 
-Notice that search engine tags end with a `?` character and that the search query will be appended to the defined url.
+### Favorites and arbitrary URLs
 
-To open those urls you use the command `:Wopen`, which accepts a url reference as argument. E.g.:
-    
-```vim
-:Wopen http://vim.org
-:Wopen vimcom
-:Wopen g?vim scripts
-```
+`:Wopen` opens any given URL. E.g.:
 
-Above commands will open http://vim.org, http://www.vim.org/community.php urls and the resulting url of searching the string "vim scripts" in google, respectively.
+    :Wopen http://vim.org
 
-If you preffer you can use `:Wopenmulti` command to open multiple urls in one step. But, please, notice that, as it is a multiple arguments command, you must scape blankspaces in the string you provide to search engines. E.g:
+But typing and remembering full URLs is annoying, so custom favorites can be defined in `g:www_urls` dictionary.
 
-```vim
-:Wopenmulti http://vim.org vim g?vim\ scripts
-```
+So, having in `vimrc`,
 
-### Default search engine
+    let g:www_urls = {
+      \ 'vim' : 'http://www.vim.org',
+      \ }
 
-You can also configure google or any other as your default search engine, through:
+following command does the same than previous one:
 
-```vim
-let g:www_default_search_engine = 'g?'
-```
+    :Wopen vim
 
-and then you can just do:
+Also, in normal mode, `<leader>wo` launches the browser using `WORD` under cursor as URL. In visual mode it does the same but taking current text selection as URL.
 
-```vim
-:Wsearch vim scripts
-```
+`:Wcopen` command and `<leader>wco` mappings do the same but using the CLI browser.
 
-By default, google will be used.
+### Search engines
+
+`:Wsearch` queries a search engine and opens the corresponding results page:
+
+E.g.:
+
+    :Wsearch google how to learn vim
+
+Previous command opens the resulting page of searching `how to learn vim` in google.
+
+Following search engines are provided by default: bitbucket, duckduckgo, google, github, stackoverflow and wikipedia.
+
+More search engines can be added through `g:www_engines` dictionary. Query is appended at the end of given URL.  E.g.:
+
+    let g:www_engines = {
+      \ 'youtube' : 'https://www.youtube.com/results?search_query=',
+      \ }
+
+In normal mode, `<leader>ws` searches `WORD` under cursor, while the same mapping in visual mode searches current visual selection. In both cases, the user is prompted to choose which search engine should be used. If none is given, duckduckgo is used, but this behaviour can be changed setting `g:www_default_search_engine` variable. E.g.:
+
+    let g:www_default_search_engine = 'google'
+
+`:Wcsearch` command and `<leader>wcs` mappings do the same but using the CLI browser.
+
+### Shortcut search engines
+
+Convenient shortcuts for commonly used search engines can be defined in `g:www_shortcut_engines` dictionary. Having in `vimrc`:
+
+    let g:www_engines = {
+      \ 'ruby' : 'http://ruby-doc.com/search.html?q=',
+    \}
+
+    let g:www_shortcut_engines = {
+      \ 'ruby': ['Docruby', '<leader>dr', 'Doccliruby', '<leader>dcr']
+    \}
+
+automatically adds `:Docruby` / `:Doccliruby` commands, and `<leader>dr` / `<leader>dcr` mappings that work like `:Wsearch` / `:Wcsearch` and `<leader>ws` / `<leader>wcs` but using ruby straight away as search engine.
+
+Remember that user defined commands must begin with an uppercase letter.
+
+This is very convenient to use as a quick way to consult API documentation.
 
 ### Sessions
 
-Urls can also be grouped in sessions in the following way:
+Arbitrary URLs and favorites can be grouped together under a name in `g:www_sessions` dictionary and opened at once using `:Wsession` command.
 
-```vim
-let g:www_sessions = {
-         \ 'vim' : ['http://vim.org', 'vimcom', 'g?vim scripts'],
-         \
-         \ }
-```
+Having in `vimrc`:
 
-Then you can open in one step all referenced urls with:
+    let g:www_urls = {
+      \ 'vim' : 'http://www.vim.org',
+      \ }
 
-```vim
-:Wsession vim
-```
+    let g:www_sessions = {
+      \ 'dev' : ['vim', 'http://stackoverflow.com'],
+      \ }
 
-### Mappings
+Running:
 
-There are also some convenient mappings:
+    :Wsession vim
 
-* `<leader>wo` . In normal mode it will open the browser using the `WORD`  under the cursor as url reference. In visual mode it will do the same with your text selection.
+would open `http://www.vim.org` and `http://stackoverflow.com` at once.
 
-* `<leader>ws` . In normal mode it will search the `WORD` under the cursor in your default search engine. In visual mode it will do the same with your text selection.
+`:Wcsession` command does the same but using the CLI browser.
 
-## Defaults
-
-Some search engines are already provided by default by vim-www. Here it is the current relation:
-
-| Tag   | Website                  |
-|-------|--------------------------|
-| g?    | https://google.com       |
-| y?    | http://youtube.com       |
-| gh?   | https://github.com       |
-| bb?   | https://bitbucket.org    |
-| so?   | http://stackoverflow.com |
-| wiki? | http://en.wikipedia.org  |
-| imdb? | http://www.imdb.com      |
-
-Google (`g?`) is the default search engine.
-
-You can overwrite these defaults and define new ones with `g:www_urls`.
-
-### Configuration and reference
+## Configuration and reference
 
 Type `:help vim-www` for a complete reference and information about configuration.
 
-### BUGS
+## Bugs
 
 Open a bug in https://github.com/waiting-for-dev/vim-www/issues
 
-### Contributing
+## Contributing
 
 1. Fork the project ( http://github.com/waiting-for-dev/vim-www/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -119,11 +118,11 @@ Open a bug in https://github.com/waiting-for-dev/vim-www/issues
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-### Version
+## Version
 
 vim-www follows [Semantic Versioning System 2.0](http://semver.org/). Current version is 0.0.4.
 
-### License
+## License
 
 The MIT Licence
 http://www.opensource.org/licenses/mit-license.php
