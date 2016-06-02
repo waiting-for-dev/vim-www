@@ -48,7 +48,15 @@ E.g.:
 
 Previous command opens the resulting page of searching `how to learn vim` in google.
 
-Following search engines are provided by default: bitbucket, devdocs, duckduckgo, google, github, stackoverflow and wikipedia.
+Following search engines are provided by default:
+
+* bitbucket
+* devdocs
+* duckduckgo
+* google
+* github
+* stackoverflow 
+* wikipedia
 
 More search engines can be added through `g:www_engines` dictionary. Query is appended at the end of given URL.  E.g.:
 
