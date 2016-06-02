@@ -322,7 +322,7 @@ CONTRIBUTING                                                 *www-contributing*
 VERSION                                                           *www-version*
 
 |vim-www| follows Semantic Versioning system 2.0 (http://semver.org/). Current
-version is 0.0.4.
+version is 1.0.0.
 ==============================================================================
 LICENSE                                                           *www-license*
 
