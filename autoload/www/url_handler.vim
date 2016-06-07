@@ -13,7 +13,7 @@ function! www#url_handler#handle(cli, url)
       call www#url_handler#handle_in_win(a:url)
       return
     elseif www#system_helper#is_macunix()
-      call www#url_handler#handle_in_macosx(a:url)
+      call www#url_handler#handle_in_macunix(a:url)
       return
     else
       call www#url_handler#handle_in_linux(a:url)
