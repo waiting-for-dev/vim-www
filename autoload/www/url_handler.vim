@@ -25,7 +25,7 @@ endfunction
 
 "Open given url in a browser using user custom command
 function! www#url_handler#handle_custom(url)
-  execute 'silent ! '.substitute(g:www_launch_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
+  execute 'silent ! '.substitute(g:www_launch_browser_command, "{{URL}}", escape(shellescape(a:url, 1), '#'), 'g')
   redraw!
 endfunction
 
@@ -36,7 +36,7 @@ function! www#url_handler#handle_cli(url)
   elseif !exists('g:loaded_dispatch')
     call www#www#echo_message('To use cli url handler you must have installed dispatch.vim')
   else
-    execute 'Dispatch '.substitute(g:www_launch_cli_browser_command, '{{URL}}', shellescape(a:url, 1), 'g')
+    execute 'Dispatch '.substitute(g:www_launch_cli_browser_command, '{{URL}}', escape(shellescape(a:url, 1), '#'), 'g')
     redraw!
   endif
 endfunction
