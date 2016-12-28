@@ -12,6 +12,9 @@ function! www#url_handler#handle(cli, url)
     elseif www#system_helper#is_windows()
       call www#url_handler#handle_in_win(a:url)
       return
+    elseif www#system_helper#is_cygwin()
+      call www#url_handler#handle_in_cygwin(a:url)
+      return
     elseif www#system_helper#is_macunix()
       call www#url_handler#handle_in_macunix(a:url)
       return
@@ -44,6 +47,12 @@ endfunction
 "Open given url in a browser in windows
 function! www#url_handler#handle_in_win(url)
    execute 'silent ! start "Title" /B '.shellescape(a:url, 1)
+endfunction
+
+"Open given url in a browser in windows from Cygwin
+function! www#url_handler#handle_in_cygwin(url)
+   execute 'silent ! cygstart '.shellescape(a:url, 1)
+   redraw!
 endfunction
 
 "Open given url in a browser in macunix
