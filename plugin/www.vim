@@ -51,8 +51,8 @@ if g:www_map_keys
    nnoremap <leader>wo :call www#www#open_url(0, expand("<cWORD>"))<CR>
    nnoremap <leader>wco :call www#www#open_url(1, expand("<cWORD>"))<CR>
    "Open visual selection as url
-   vnoremap <leader>wo :call www#www#open_url(0, @*)<CR>
-   vnoremap <leader>wco :call www#www#open_url(1, @*)<CR>
+   vnoremap <leader>wo "*y:call www#www#open_url(0, @*)<CR>
+   vnoremap <leader>wco "*y:call www#www#open_url(1, @*)<CR>
    "Search WORD under the cursor
    nnoremap <leader>ws :call www#www#user_input_search(0, expand("<cWORD>"))<CR>
    nnoremap <leader>wcs :call www#www#user_input_search(1, expand("<cWORD>"))<CR>
