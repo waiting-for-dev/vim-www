@@ -51,14 +51,14 @@ if g:www_map_keys
    nnoremap <leader>wo :call www#www#open_url(0, expand("<cWORD>"))<CR>
    nnoremap <leader>wco :call www#www#open_url(1, expand("<cWORD>"))<CR>
    "Open visual selection as url
-   vnoremap <leader>wo :call www#www#open_url(0, @*)<CR>
-   vnoremap <leader>wco :call www#www#open_url(1, @*)<CR>
+   vnoremap <leader>wo "*y:call www#www#open_url(0, @*)<CR>
+   vnoremap <leader>wco "*y:call www#www#open_url(1, @*)<CR>
    "Search WORD under the cursor
    nnoremap <leader>ws :call www#www#user_input_search(0, expand("<cWORD>"))<CR>
    nnoremap <leader>wcs :call www#www#user_input_search(1, expand("<cWORD>"))<CR>
    "Search visual selection
-   vnoremap <leader>ws :call www#www#user_input_search(0, @*)<CR>
-   vnoremap <leader>wcs :call www#www#user_input_search(1, @*)<CR>
+   vnoremap <leader>ws "*y:call www#www#user_input_search(0, @*)<CR>
+   vnoremap <leader>wcs "*y:call www#www#user_input_search(1, @*)<CR>
 endif
 
 " Define user configured commands and maps that are a shortcut to search using given engines. Definition have to be made in g:www_shortcut_engines, which have to be a dictionary { engine: [command, mappings, cli_command, cli_mappings]}. For each entry, dynamic {command}/{cli_command} commands, and {mappings}/{cli_mappings} normal & visual mappings are defined that work just as Wsearch/Wcsearch and ws/wcs
@@ -74,14 +74,14 @@ if exists('g:www_shortcut_engines')
     endif
     if !empty(mapping)
       execute "nnoremap ".mapping." :call www#www#search(0, '".engine."', expand(\"<cWORD>\"))<CR>"
-      execute "vnoremap ".mapping." :call www#www#search(0, '".engine."', @*)<CR>"
+      execute "vnoremap ".mapping." \"*y:call www#www#search(0, '".engine."', @*)<CR>"
     endif
     if !empty(cli_command)
       execute "command -nargs=1 ".cli_command." call www#www#search(1, '".engine."', <f-args>)"
     endif
     if !empty(cli_mapping)
       execute "nnoremap ".cli_mapping." :call www#www#search(1, '".engine."', expand(\"<cWORD>\"))<CR>"
-      execute "vnoremap ".cli_mapping." :call www#www#search(1, '".engine."', @*)<CR>"
+      execute "vnoremap ".cli_mapping." \"*y:call www#www#search(1, '".engine."', @*)<CR>"
     end
   endfor
 endif
