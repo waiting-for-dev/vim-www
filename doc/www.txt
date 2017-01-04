@@ -25,7 +25,7 @@ vim-www allows launching a web browser from vim to open arbitrary URLs,
 defined favorites and search engine results.
 
 The web browser to be used is detected automatically, but it can be manually
-set through |g:www_launch_browser_command|, using "{{URL}}}" as placeholder
+set through |g:www_launch_browser_command|, optionally using "{{URL}}}" as placeholder
 for the actual URL. E.g.:
 
     let g:www_launch_browser_command = "iceweasel {{URL}} &"
@@ -268,17 +268,17 @@ search engine is duckduckgo.
                                                 *g:www_launch_browser_command*
 
 The command that will be used to launch the browser. If it is not set ,
-|vim-www| will try to make the best guess. Use "{{URL}}" placeholder to tell
-where the actual URL should be. E.g.: >
+|vim-www| will try to make the best guess. Optionally, use "{{URL}}" placeholder to
+tell where the actual URL should be. E.g.: >
 
     let g:www_launch_browser_command = "icewasel {{URL}} &"
 
                                             *g:www_launch_cli_browser_command*
 
 The command that will be passed to vim-dispatch to launch a CLI web browser.
-Use "{{URL}}" as placeholder for the actual URL. E.g.:
+Optionally, use "{{URL}}" as placeholder for the actual URL. E.g.:
 
-    let g:www_launch_cli_browser_command = "elinks {{URL}} &"
+    let g:www_launch_cli_browser_command = "elinks"
 
                                                               *g:www_shortcut_engines*
 

@@ -10,7 +10,8 @@ Just like any other vim plugin. Use [pathogen](https://github.com/tpope/vim-path
 
 vim-www allows launching a web browser from vim to open arbitrary URLs, defined favorites and search engine results.
 
-The web browser to be used is detected automatically, but it can be manually set through `g:www_launch_browser_command`, using `{{URL}}}` as placeholder for the actual URL. E.g.:
+The web browser to be used is detected automatically, but it can be manually set
+through `g:www_launch_browser_command`, optionally using `{{URL}}}` as placeholder for the actual URL. E.g.:
 
     let g:www_launch_browser_command = "iceweasel {{URL}} &"
 
