@@ -4,6 +4,7 @@ let g:www#defaults#engines = {
          \ 'devdocs' : 'https://devdocs.io#q=',
          \ 'google' : 'https://www.google.com/search?q=',
          \ 'github' : 'https://github.com/search?utf8=%E2%9C%93&ref=simplesearch&q=',
+         \ 'gitlab' : 'https://gitlab.com/search?utf8=%E2%9C%93&search=',
          \ 'bitbucket' : 'https://bitbucket.org/repo/all?name=',
          \ 'stackoverflow' : 'https://stackoverflow.com/search?q=',
          \ 'wikipedia' : 'https://en.wikipedia.org/w/index.php?search=',
