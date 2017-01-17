@@ -7,7 +7,7 @@ if exists("g:loaded_www")
    finish
 endif
 
-let g:loaded_www = "1.0.3"
+let g:loaded_www = "1.1.0"
 
 let s:save_cpo = &cpo
 set cpo&vim
