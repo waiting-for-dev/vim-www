@@ -50,7 +50,7 @@ endfunction
 
 "Open given url in a browser in windows from Cygwin
 function! www#url_handler#handle_in_cygwin(url)
-  call www#url_handler#dispatch_to_shell('cygstart', a:url)
+  call www#url_handler#dispatch_to_shell('cygstart', substitute(a:url,'"','""','g'))
 endfunction
 
 "Open given url in a browser in macunix
